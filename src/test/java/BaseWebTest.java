@@ -1,7 +1,6 @@
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.gucci.layers.web.manager.WebDriverManager;
-import com.gucci.layers.web.page.home.HomePage;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
