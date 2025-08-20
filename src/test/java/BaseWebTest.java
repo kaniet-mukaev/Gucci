@@ -1,15 +1,19 @@
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.gucci.layers.web.manager.WebDriverManager;
+import com.gucci.layers.web.page.home.HomePage;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
-public class BaseTest {
+import static com.gucci.config.ConfigurationManager.getAppConfig;
 
-    private final String BASE_URL = "https://automationexercise.com/";
-    public <T> T open(Class<T> clazz) {
-        return Selenide.open(BASE_URL, clazz);
+public class BaseWebTest {
+
+    private final String BASE_URL = getAppConfig().baseUrl();
+
+    public <T> T open(String endPoint, Class<T> clazz) {
+        return Selenide.open(String.format("%s/%s", BASE_URL, endPoint), clazz);
     }
 
     @BeforeAll

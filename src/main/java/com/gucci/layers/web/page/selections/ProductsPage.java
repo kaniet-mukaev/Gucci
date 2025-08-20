@@ -5,6 +5,9 @@ import com.codeborne.selenide.SelenideElement;
 import com.gucci.layers.web.page.BasePage;
 import org.openqa.selenium.By;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -27,4 +30,6 @@ public class ProductsPage extends BasePage<ProductsPage> {
         allProductsHeader.shouldBe(Condition.visible);
         return this;
     }
+
+
 }

@@ -2,9 +2,6 @@ package com.gucci.entities;
 
 import com.gucci.enums.Country;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
-
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,8 +10,8 @@ import java.time.LocalDateTime;
 @ToString
 @EqualsAndHashCode
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
+    // Lombok автоматически создаст геттеры и сеттеры для всех полей
     String title;
     String name;
     String email;
