@@ -2,6 +2,7 @@ package com.gucci.layers.web.manager;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
@@ -58,4 +59,10 @@ public class ElementManager {
                 .selectOption(text);
         return this;
     }
+
+//    public ElementManager scrollToElement(SelenideElement element) {
+//        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+//        js.executeScript("arguments[0].scrollIntoView(true);", element);
+//        return this;
+//    }
 }
