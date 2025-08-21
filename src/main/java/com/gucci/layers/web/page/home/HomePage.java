@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.gucci.layers.web.page.BasePage;
+import com.gucci.layers.web.page.selections.ContactUsPage;
 import com.gucci.layers.web.page.signup_login.DeleteAccountPage;
 import com.gucci.layers.web.page.signup_login.LoginPage;
 import org.openqa.selenium.By;
@@ -23,23 +24,14 @@ public class HomePage extends BasePage<HomePage> {
     public SelenideElement loggedInAsUserHeader = header.$("b");
     public SelenideElement deleteAccountBtn = header.$("a[href='/delete_account']");
     public SelenideElement logoutBtn = header.$("a[href='/logout']");
+    public SelenideElement contactUsBtn= header.$("a[href='/contact_us']");
 
     public SelenideElement footer = $("#footer .footer-widget");
     public SelenideElement subscription = footer.$("h2");
 
-
     public SelenideElement homeOrange = $x("//a[@href='/' and contains(@style, 'orange')]");
     public SelenideElement signupLoginBtn = $x("//a[@href='/login']");
-    //public SelenideElement logoutBtn = $x("//i[@class='fa fa-lock']");
-//    public SelenideElement loggedInAsUsernameIsVisible = $x("//a[text()=' Logged in as ']");
-//    public SelenideElement contactUsBtn = $x("//a[normalize-space(text())='Contact us']");
-//    public SelenideElement testCasesBtn = $x("//a[text()=' Test Cases']");
-//    public SelenideElement productsBtn = $x("//i[@class='material-icons card_travel']");
-//    public SelenideElement subscriptionHeader = $x("//div[@class='single-widget']/h2");
-//    public SelenideElement subscribeEmailInput = $(By.id("susbscribe_email"));
-//    public SelenideElement subscribeEmailBtn = $(By.id("subscribe"));
-//    public SelenideElement subscribedAlert = $x("//div[@class='alert-success alert']");
-//    public SelenideElement cart = $x("//a[@href='/view_cart']/i");
+
 
     @Override
     public HomePage waitForPageLoaded() {
@@ -59,6 +51,10 @@ public class HomePage extends BasePage<HomePage> {
         }
     }
 
+    public ContactUsPage clickContactUs() {
+        elementManager.click(contactUsBtn);
+        return Selenide.page(ContactUsPage.class);
+    }
 
     public List<String> getBrands() {
         List<String> brandsList = new ArrayList<>();

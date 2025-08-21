@@ -26,8 +26,6 @@ public class LoginPage extends BasePage<LoginPage> {
     public SelenideElement loginPassword = login_form.$("input[data-qa='login-password']");
     public SelenideElement loginBtn = login_form.$("button");
     public SelenideElement incorrectParamsMessage = login_form.$("form p");
-  
-
 
     public SelenideElement homeBtn = $("ul a[href='/']");
 

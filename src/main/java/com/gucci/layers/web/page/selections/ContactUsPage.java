@@ -9,20 +9,22 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ContactUsPage extends BasePage<ContactUsPage> {
-    public SelenideElement getInTouchHeader = $x("//h2[text()='Get In Touch']");
-    public SelenideElement inputName = $x("//input[@name = 'name']");
-    public SelenideElement inputEmail = $x("//input[@name = 'email']");
-    public SelenideElement inputSubject = $x("//input[@name = 'subject']");
-    public SelenideElement inputMessage = $x("//textarea[@id = 'message']");
-    public SelenideElement submitBtn = $x("//input[@data-qa='submit-button']");
-    public SelenideElement uploadFile = $x("//input[@name = 'upload_file']");
-    public SelenideElement successHeader = $x("//div[@class='status alert alert-success' " +
-            "and normalize-space(text())='Success! Your details have been submitted successfully.']");
-    public SelenideElement homeBtn = $x("//span[normalize-space(text())='Home']");
+
+    public SelenideElement getInTouchHeader = $(".contact-form h2");
+    public SelenideElement detailSubmittedMessage = $(".contact-form div[class='status alert alert-success']");
+
+    public SelenideElement form_section = $("#form-section");
+    public SelenideElement inputName = form_section.$("input[name='name']");
+    public SelenideElement inputEmail = form_section.$("input[name='email']");
+    public SelenideElement inputSubject = form_section.$("input[name='subject']");
+    public SelenideElement inputMessage = form_section.$("textarea[name='message']");
+    public SelenideElement uploadFile = form_section.$("input[type='file']");
+    public SelenideElement submitBtn = form_section.$("input[type='submit']");
+    public SelenideElement homeBtn = form_section.$("a[class='btn btn-success']");
 
     @Override
     public ContactUsPage waitForPageLoaded() {
-        getInTouchHeader.shouldBe(Condition.visible);
+        getInTouchHeader.shouldHave(Condition.exactText("Get In Touch"));
         return this;
     }
 }
