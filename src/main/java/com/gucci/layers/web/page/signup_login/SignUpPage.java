@@ -17,8 +17,6 @@ public class SignUpPage extends BasePage<SignUpPage> {
     public SelenideElement login_form = $(".login-form");
     public SelenideElement enterAccountInformationHeader = login_form.$("b");
 
-
-
     public SelenideElement password = $(By.id("password"));
     public SelenideElement selectDays = $(By.id("days"));
     public SelenideElement selectMonths = $(By.id("months"));
