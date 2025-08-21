@@ -5,9 +5,11 @@ import org.junit.jupiter.api.DisplayName;
 
 import org.junit.jupiter.api.Test;
 
+import static io.qameta.allure.Allure.step;
+
 //@Tag(Tags.SMOKE)
 //@Tag(Tags.WEB)
-public class ContactUsTest extends BaseWebTest{
+public class ContactUsTest extends BaseWebTest {
 
     @Test
     @DisplayName("Test Case 6: Contact Us Form")
@@ -22,10 +24,12 @@ public class ContactUsTest extends BaseWebTest{
                 .clickSubmit()
                 .clickAlertAccept();
 
-        softAssertions.assertThat(homePage.detailSubmittedMessage.getText())
-                .as("Check Success Message")
-                .isEqualTo("Success! Your details have been submitted successfully.");
-
+        step("Проверка присутсвия текста", () -> {
+                    softAssertions.assertThat(homePage.detailSubmittedMessage.getText())
+                            .as("Check Success Message")
+                            .isEqualTo("Success! Your details have been submitted successfully.");
+                }
+        );
         softAssertions.assertAll();
 
         homePage.clickHome();
