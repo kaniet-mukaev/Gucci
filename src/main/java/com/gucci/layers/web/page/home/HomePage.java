@@ -25,14 +25,11 @@ public class HomePage extends BasePage<HomePage> {
     public SelenideElement deleteAccountBtn = header.$("a[href='/delete_account']");
     public SelenideElement logoutBtn = header.$("a[href='/logout']");
     public SelenideElement contactUsBtn = header.$("a[href='/contact_us']");
-    public SelenideElement test_caseBtn = header.$("a[href='/test_cases']");
 
     public SelenideElement footer = $("#footer .footer-widget");
     public SelenideElement subscription = footer.$("h2");
 
     public SelenideElement homeOrange = $x("//a[@href='/' and contains(@style, 'orange')]");
-    public SelenideElement signupLoginBtn = $x("//a[@href='/login']");
-
 
     @Override
     public HomePage waitForPageLoaded() {
