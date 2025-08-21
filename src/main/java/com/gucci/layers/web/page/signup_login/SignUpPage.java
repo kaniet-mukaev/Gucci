@@ -13,13 +13,16 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class SignUpPage extends BasePage<SignUpPage> {
-    public SelenideElement enterAccountInformationHeader = $x("//b[text()='Enter Account Information']");
+
+    public SelenideElement login_form = $(".login-form");
+    public SelenideElement enterAccountInformationHeader = login_form.$("b");
+
+
+
     public SelenideElement password = $(By.id("password"));
     public SelenideElement selectDays = $(By.id("days"));
     public SelenideElement selectMonths = $(By.id("months"));
     public SelenideElement selectYears = $(By.id("years"));
-    public SelenideElement checkboxNewsletter = $(By.id("newsletter"));
-    public SelenideElement checkboxOption = $(By.id("optin"));
     public SelenideElement firstNameInput = $(By.id("first_name"));
     public SelenideElement lastNameInput = $(By.id("last_name"));
     public SelenideElement companyInput = $(By.id("company"));
@@ -64,7 +67,7 @@ public class SignUpPage extends BasePage<SignUpPage> {
 
     public SignUpPage selectDateMonthYearCalendar(String dateMonthYear) {
         String[] dateMonthYearParts = dateMonthYear.split("/");
-        String day = dateMonthYearParts[0];
+        String day = dateMonthYearParts[0].substring(1);
         String month = dateMonthYearParts[1];
         String year = dateMonthYearParts[2];
 
