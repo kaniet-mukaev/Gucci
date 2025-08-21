@@ -3,20 +3,27 @@ import com.gucci.entities.UserGenerated;
 import com.gucci.layers.web.page.home.HomePage;
 import com.gucci.layers.web.page.signup_login.LoginPage;
 import com.gucci.layers.web.page.signup_login.SignUpPage;
-import io.qameta.allure.Description;
 import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
+import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Tag(Tags.SMOKE)
+@Tag(Tags.WEB)
 public class RegistrationTest extends BaseWebTest {
 
-    @Description("Test Case 1: Register User")
-    @Link("https://automationexercise.com/test_cases")
-    @Owner("Aliia")
     @Test()
+    @DisplayName("Test Case 1: Register User")
+    @Owner("Aliia")
+    @Tag("Test Case 1")//идентификатор
+    @Link("https://automationexercise.com/test_cases")
     public void registerNewUserTest() {
 
         User firstUser = UserGenerated.randomUser();
+        SoftAssertions softly = new SoftAssertions();
+
 
         var homePage = open("", HomePage.class)
                 .waitForPageLoaded()
@@ -34,10 +41,16 @@ public class RegistrationTest extends BaseWebTest {
                 .waitForPageLoaded()
                 .clickContinue();
 
+//        softly.assertThat("Hello")
+//                .as("Check greeting")
+//                .isEqualTo("Hi");
+//
+//        softly.assertAll();
+
     }
 
-    @Description("Test Case 5: Register User with existing email")
     @Link("https://automationexercise.com/test_cases")
+    @DisplayName("Test Case 5: Register User with existing email")
     @Owner("Aliia")
     @Test()
     public void registerUserWithExistingEmailTest() {

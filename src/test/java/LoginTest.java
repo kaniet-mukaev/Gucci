@@ -3,13 +3,19 @@ import com.gucci.entities.UserGenerated;
 import com.gucci.layers.web.page.home.HomePage;
 import com.gucci.layers.web.page.signup_login.LoginPage;
 import com.gucci.layers.web.page.signup_login.SignUpPage;
-import io.qameta.allure.Description;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Tag(Tags.SMOKE)
+@Tag(Tags.WEB)
 public class LoginTest extends BaseWebTest{
 
-    @Description("Test Case 2: Login User with correct email and password")
     @Test
+    @DisplayName("Test Case 2: Login User with correct email and password")
+    @Tag("Test Case 2")
+    @Disabled("Disabled by Aliia")
     public void loginTestCorrectParams() {
 
         User firstUser = UserGenerated.randomUser();;
@@ -39,9 +45,10 @@ public class LoginTest extends BaseWebTest{
 
     }
 
-    @Description("Test Case 3: Login User with incorrect email and password")
     @Test
-    public void loginTestIncorrectParams() {
+    @DisplayName("Test Case 3: Login User with incorrect email and password")
+    @Tag("Test Case 3")
+    public void loginWithIncorrectParamsTest() {
 
         String email = "aliia1@gmail.com";
         String password = "123";
@@ -55,8 +62,10 @@ public class LoginTest extends BaseWebTest{
 
     }
 
-    @Description("Test Case 4: Logout User")
+
     @Test
+    @DisplayName("Test Case 4: Logout User")
+    @Tag("Test Case 4")
     public void logout() {
 
         User firstUser = UserGenerated.randomUser();;

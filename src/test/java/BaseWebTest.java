@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 
 import static com.gucci.config.ConfigurationManager.getAppConfig;
 
+//сделать 6 по 10 тест кейсы
 public class BaseWebTest {
 
     private final String BASE_URL = getAppConfig().baseUrl();

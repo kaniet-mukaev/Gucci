@@ -60,3 +60,11 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+// Отдельная задача для запуска только тестов с @Tag("Smoke")
+tasks.register<Test>("smokeTest") {
+    group = "verification"
+    description = "Runs tests tagged with @Tag(\"Smoke\")"
+    useJUnitPlatform {
+        includeTags("Smoke")
+    }
+}
