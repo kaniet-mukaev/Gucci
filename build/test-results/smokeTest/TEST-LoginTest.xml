@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="LoginTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-08-22T04:05:36.368Z" hostname="MacBook-Pro-Aliya.local" time="21.465">
+  <properties/>
+  <testcase name="Test Case 3: Login User with incorrect email and password" classname="LoginTest" time="8.415"/>
+  <testcase name="Test Case 4: Logout User" classname="LoginTest" time="15.145"/>
+  <testcase name="Test Case 2: Login User with correct email and password" classname="LoginTest" time="21.465"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[авг. 22, 2025 10:05:37 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 139
+авг. 22, 2025 10:05:37 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 139
+авг. 22, 2025 10:05:37 AM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
+WARNING: Unable to find version of CDP to use for 139.0.7258.139. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.30.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+авг. 22, 2025 10:05:37 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 139
+авг. 22, 2025 10:05:37 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 139
+авг. 22, 2025 10:05:37 AM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
+WARNING: Unable to find version of CDP to use for 139.0.7258.139. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.30.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+авг. 22, 2025 10:05:37 AM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
+WARNING: Unable to find version of CDP to use for 139.0.7258.139. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.30.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+авг. 22, 2025 10:05:37 AM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
+WARNING: Unable to find version of CDP to use for 139.0.7258.139. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.30.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+]]></system-err>
+</testsuite>
