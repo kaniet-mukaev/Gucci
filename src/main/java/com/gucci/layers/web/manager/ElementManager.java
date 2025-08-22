@@ -48,6 +48,7 @@ public class ElementManager {
     public ElementManager selectByValue(SelenideElement element, String  value) {
         element
                 .shouldBe(visible, Duration.ofSeconds(DELAY))
+                .shouldBe(enabled, Duration.ofSeconds(DELAY))
                 .selectOption(value);
         return this;
     }
