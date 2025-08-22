@@ -1,6 +1,7 @@
 import com.codeborne.selenide.SelenideElement;
 import com.gucci.layers.web.page.home.HomePage;
 import com.gucci.layers.web.page.selections.ProductsPage;
+import io.qameta.allure.Owner;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -8,10 +9,14 @@ import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 
+@Tag(Tags.SMOKE)
+@Tag(Tags.WEB)
 public class AllProductAndProductDetailsTest extends BaseWebTest {
 
     @Test
     @DisplayName("Test Case 8: Verify All Products and product detail page")
+    @Owner("Aliia")
+    @Tag("Test Case 8")
     public void verifyAllProductAndProductDetailTest() {
 
         SoftAssertions softAssertions = new SoftAssertions();
@@ -27,7 +32,7 @@ public class AllProductAndProductDetailsTest extends BaseWebTest {
                     .allMatch(SelenideElement::isDisplayed);
         });
 
-        var productDetail = productPage.clickViewProduct();
+        var productDetail = productPage.clickViewProduct("Blue Top");
 
         step("Verify that detail detail is visible: product name, category, price, availability, condition, brand", () -> {
             softAssertions.assertThat(productDetail.productName.getText())

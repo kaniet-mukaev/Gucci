@@ -1,6 +1,7 @@
 import com.codeborne.selenide.SelenideElement;
 import com.gucci.layers.web.page.home.HomePage;
 import com.gucci.layers.web.page.selections.ProductsPage;
+import io.qameta.allure.Owner;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -8,10 +9,14 @@ import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 
+@Tag(Tags.SMOKE)
+@Tag(Tags.WEB)
 public class SearchProductTest extends BaseWebTest {
 
     @Test
     @DisplayName("Test Case 9: Search Product")
+    @Owner("Aliia")
+    @Tag("Test Case 9")
     public void searchProductTest() {
 
         SoftAssertions softAssertions = new SoftAssertions();
