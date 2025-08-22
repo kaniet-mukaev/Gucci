@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestCasesTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-08-22T05:46:30.891Z" hostname="MacBook-Pro-Aliya.local" time="3.455">
-  <properties/>
-  <testcase name="Test Case 7: Verify Test Cases Page" classname="TestCasesTest" time="3.455"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
