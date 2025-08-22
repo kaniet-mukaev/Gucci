@@ -1,11 +1,9 @@
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import com.gucci.data.Sections;
 import com.gucci.layers.web.manager.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-
 import static com.gucci.config.ConfigurationManager.getAppConfig;
 
 //сделать 6 по 10 тест кейсы
