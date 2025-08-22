@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f520b343-4b6b-4453-9724-491c8a647101" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/PlaceOrderTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/PlaceOrderTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/default-package.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/default-package.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-PlaceOrderTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-PlaceOrderTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/CartTest.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/LoginTest.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/PlaceOrderTest.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/ProductsDetailsTest.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/RegistrationTest.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/data/Generated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/data/Generated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/entities/UserGenerated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/entities/UserGenerated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/manager/ElementManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/manager/ElementManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/home/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/home/HomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/CartPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/CartPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/PaymentPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/PaymentPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/ProductDetailsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/ProductDetailsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/ProductsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/ProductsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/AccountCreatedPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/AccountCreatedPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/DeleteAccountPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/DeleteAccountPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/SignUpPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/SignUpPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BaseWebTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BaseWebTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CartTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CartTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/PlaceOrderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PlaceOrderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ProductsDetailsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProductsDetailsTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;aidaitalantbekova&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kaniet-mukaev/Gucci.git&quot;,
+    &quot;accountId&quot;: &quot;81f7967b-116a-49ea-82a1-db4eccca4659&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="31aPmfgiZKpBtDajPH53b7yWaq7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build Gucci.executor": "Run",
+    "Gradle.CartTest.verifyCartDetailsTest.executor": "Run",
+    "Gradle.CartTest.verifySubscriptionInCartTest.executor": "Run",
+    "Gradle.PlaceOrderTest.PlaceOrderLoginBeforeCheckout.executor": "Run",
+    "Gradle.PlaceOrderTest.executor": "Run",
+    "Gradle.PlaceOrderTest.registerWhileCheckout.executor": "Run",
+    "Gradle.ProductsDetailsTest.executor": "Run",
+    "Gradle.ProductsDetailsTest.verifyProductQuantityInCartTest.executor": "Run",
+    "JUnit.PlaceOrderTest.registerWhileCheckout.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "aidai",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="RunManager" selected="Gradle.PlaceOrderTest">
+    <configuration name="PlaceOrderTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;PlaceOrderTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="PlaceOrderTest.PlaceOrderLoginBeforeCheckout" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;PlaceOrderTest.PlaceOrderLoginBeforeCheckout&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="PlaceOrderTest.registerWhileCheckout" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;PlaceOrderTest.registerWhileCheckout&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="ProductsDetailsTest.verifyProductQuantityInCartTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ProductsDetailsTest.verifyProductQuantityInCartTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="PlaceOrderTest.registerWhileCheckout" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Gucci.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PlaceOrderTest" />
+      <option name="METHOD_NAME" value="registerWhileCheckout" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.PlaceOrderTest" />
+        <item itemvalue="Gradle.PlaceOrderTest.PlaceOrderLoginBeforeCheckout" />
+        <item itemvalue="Gradle.ProductsDetailsTest.verifyProductQuantityInCartTest" />
+        <item itemvalue="Gradle.PlaceOrderTest.registerWhileCheckout" />
+        <item itemvalue="JUnit.PlaceOrderTest.registerWhileCheckout" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f520b343-4b6b-4453-9724-491c8a647101" name="Changes" comment="" />
+      <created>1755759372407</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1755759372407</updated>
+    </task>
+    <servers />
+  </component>
+</project>

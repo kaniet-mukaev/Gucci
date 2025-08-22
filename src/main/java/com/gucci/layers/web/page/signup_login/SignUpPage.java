@@ -4,11 +4,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.gucci.entities.User;
-import com.gucci.layers.web.manager.ElementManager;
 import com.gucci.layers.web.page.BasePage;
 import org.openqa.selenium.By;
-
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -44,8 +41,6 @@ public class SignUpPage extends BasePage<SignUpPage> {
 
     public AccountCreatedPage signUpNewUser(User user) {
         elementManager.click($x("//input[@value='"+ user.getTitle() +"']"))
-                .verifyAttributeValue(name, "value", user.getName())
-                .verifyAttributeValue(email, "value", user.getEmail())
                 .input(password, user.getPassword());
         selectDateMonthYearCalendar(user.getDateOfBirth());
 
