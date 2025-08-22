@@ -6,6 +6,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.gucci.layers.web.page.BasePage;
 import com.gucci.layers.web.page.selections.CartPage;
+import com.gucci.layers.web.page.selections.CategoryProductsPage;
 import com.gucci.layers.web.page.selections.ContactUsPage;
 import com.gucci.layers.web.page.selections.ProductDetailsPage;
 import com.gucci.layers.web.page.signup_login.DeleteAccountPage;
@@ -20,7 +21,6 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$x;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HomePage extends BasePage<HomePage> {
     public SelenideElement header = $(By.id("header"));
@@ -45,7 +45,8 @@ public class HomePage extends BasePage<HomePage> {
     public SelenideElement inputSubscriptionEmail = single_widget.$("input[id='susbscribe_email']");
     public SelenideElement subscriptionBtn = single_widget.$("button");
     public SelenideElement subscriptionHeader = $x("//div[@class='alert-success alert']");
-
+    public SelenideElement womenCategory = $x("//a[@href='#Women']");
+    public SelenideElement womenTopsSubCategory = $x("//a[text() = 'Tops ']");
 
     @Override
     public HomePage waitForPageLoaded() {
@@ -65,7 +66,6 @@ public class HomePage extends BasePage<HomePage> {
                 ".//ul[@class='nav navbar-nav']//a[normalize-space(text())='" + section + "']"));
         elementManager.click(sectionElement);
         try {
-            // Возвращаем новый объект указанного Page Object
             return pageClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException("Не удалось создать экземпляр " + pageClass.getSimpleName(), e);
@@ -140,7 +140,6 @@ public class HomePage extends BasePage<HomePage> {
                 "(//p[normalize-space(text())='" + productName + "']/ancestor::div[contains(@class,'product')]//a[contains(@class,'add-to-cart')])[1]"
         ));
 
-        // Если обычный click() не работает из-за iframe рекламы, используем JS:
         Selenide.executeJavaScript("arguments[0].click();", addToCartButton);
         return this;
     }
@@ -151,12 +150,11 @@ public class HomePage extends BasePage<HomePage> {
         return this;
     }
 
-
     @Step("View cart")
     public CartPage clickViewCart() {
         viewCartBtn.shouldBe(Condition.visible, Duration.ofSeconds(10));
         elementManager.click(viewCartBtn);
-        return new CartPage();
+        return page(CartPage.class);
     }
 
     @Step("click view product")
@@ -176,13 +174,30 @@ public class HomePage extends BasePage<HomePage> {
     public SelenideElement getProductName(String productName) {
         SelenideElement productByName = $x("//div[@class='productinfo text-center']/p[contains(text(),'Blue Top')]");
         return productByName;
-
     }
 
     @Step("get product price")
     public SelenideElement getProductPrice(String productName) {
         SelenideElement productByPrice = $x("(//div[@class='productinfo text-center']/h2[contains(text(),'Rs. 500')])[1]");
         return productByPrice;
+    }
+
+    @Step("Click on 'Women' category")
+    public HomePage clickWomenCategory() {
+        elementManager.click(womenCategory);
+        return this;
+    }
+
+    @Step("Click on any category link under 'Women' category, for example: Dress")
+    public CategoryProductsPage clickWomenSubCategory() {
+        elementManager.click(womenTopsSubCategory);
+        return page(CategoryProductsPage.class);
+    }
+
+    @Step("Verify that categories are visible on left side bar")
+    public HomePage verifyLeftSideBarIsVisible() {
+        left_sidebar.shouldBe(Condition.visible);
+        return this;
     }
 }
 

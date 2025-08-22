@@ -31,7 +31,7 @@ public class SearchProductTest extends BaseWebTest {
                 .clickSearchBtn();
 
         step("Verify that detail detail is visible: product name, category, price, availability, condition, brand", () -> {
-            softAssertions.assertThat(productPage.searchProductHeader.getText())
+            softAssertions.assertThat(productPage.searchedProductsHeader.getText())
                     .as("Verify search product header")
                     .isEqualTo("Searched Products");
         });
