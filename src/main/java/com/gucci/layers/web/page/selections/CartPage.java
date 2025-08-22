@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.gucci.layers.web.page.BasePage;
 import com.gucci.layers.web.page.signup_login.LoginPage;
+import com.gucci.utils.WaitManager;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import java.util.List;
@@ -31,7 +32,8 @@ public class CartPage extends BasePage<CartPage> {
     public SelenideElement formControl = $x("(//textarea[@class='form-control'])");
     public SelenideElement placeOrder = $x("(//a[text() = 'Place Order'])");
     public SelenideElement quantityInCart = $x(".cart_quantity_input");
-
+    public ElementsCollection deleteProductFromCart = $$x("//a[@class = 'cart_quantity_delete']");
+    public SelenideElement cartIsEmptyMessage = $x("//b[text() = 'Cart is empty!']");
 
     @Override
     public CartPage waitForPageLoaded() {
@@ -95,14 +97,31 @@ public class CartPage extends BasePage<CartPage> {
         elementManager.input(formControl, "Плохой товар");
         return this;
     }
+
     @Step("click by place order")
     public PaymentPage clickPlaceOrder() {
         elementManager.click(placeOrder);
         return page(PaymentPage.class);
     }
+
+    @Step("get product quantity")
     public String getProductQuantity(String productName) {
-        SelenideElement quantityInput = $x("//td[@class='cart_description']//a[text()='"+productName+"']/ancestor::tr//button");
+        SelenideElement quantityInput = $x("//td[@class='cart_description']//a[text()='"
+                + productName + "']/ancestor::tr//button");
         return quantityInput.getText();
     }
 
+    @Step("click delete product from cart")
+    public CartPage clickDeleteProductFromCart() {
+        for (SelenideElement element : deleteProductFromCart) {
+            elementManager.click(element);
+        }
+        return this;
+    }
+
+    @Step("verify that product is removed from the cart")
+    public CartPage verifyThatProductIsRemovedFromTheCart() {
+        cartIsEmptyMessage.shouldHave(Condition.exactText("Cart is empty!"));
+        return this;
+    }
 }

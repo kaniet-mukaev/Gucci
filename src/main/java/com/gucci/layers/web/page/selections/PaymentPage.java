@@ -17,7 +17,7 @@ public class PaymentPage extends BasePage<PaymentPage> {
     public SelenideElement expiry_month = $x("//input[@name='cvc']");
     public SelenideElement expiry_year = $x("//input[@data-qa='expiry-year']");
     public SelenideElement payAndConfirmOrder = $x("//button [text() = 'Pay and Confirm Order']");
-    public SelenideElement congratulationsText = $x("(//p[text()='Congratulations! Your order has been confirmed!'])");
+    public SelenideElement placeSuccessMessage = $x("(//div[@class = 'alert-success alert'])[1]");
 
 
 Faker faker = new Faker();
@@ -36,18 +36,16 @@ Faker faker = new Faker();
         elementManager.input(expiry_year, String.valueOf(faker.number().numberBetween(25, 30))); // 2025-2030
         return this;
     }
+
   @Step("click pay and confirm order")
     public PaymentPage clickPayAndConfirmOrder () {
         elementManager.click(payAndConfirmOrder);
         return this;
-
     }
-    @Step("Congratulations! your order has been confirmed!")
-    public HomePage verifyCongratulationsYourOrderHasBeenConfirmed(){
-        congratulationsText.shouldHave(Condition.visible);
+
+    @Step("Your order has been placed successfully!")
+    public HomePage verifyOrderPlacedSuccessfully(){
+        placeSuccessMessage.shouldHave(Condition.exactText("Your order has been placed successfully!"));
         return page(HomePage.class);
     }
-
 }
-
-
