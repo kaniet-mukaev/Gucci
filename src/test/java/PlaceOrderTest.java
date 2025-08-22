@@ -2,23 +2,25 @@
 import com.gucci.entities.User;
 import com.gucci.entities.UserGenerated;
 import com.gucci.layers.web.page.home.HomePage;
+import com.gucci.layers.web.page.signup_login.LoginPage;
 import com.gucci.layers.web.page.signup_login.SignUpPage;
-import net.datafaker.Faker;
-import org.assertj.core.api.SoftAssertions;
+import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import static com.gucci.data.Sections.SIGN_IN_LOGIN;
 
 public class PlaceOrderTest extends BaseWebTest {
+
     @Test
     @DisplayName("Place Order: Register while Checkout")
+    @Owner("Aidai")
     @Tag("Test case: 14")
     public void registerWhileCheckout() {
-        String name = "Aidai";
+
         User firstUser = UserGenerated.randomUser();
-        ;
+
         var productName = "Blue Top";
-        Faker faker = new Faker();
         open("", HomePage.class)
                 .waitForPageLoaded()
                 .addProductToCart(productName)
@@ -26,14 +28,14 @@ public class PlaceOrderTest extends BaseWebTest {
                 .waitForPageLoaded()
                 .clickProceedCheckout()
                 .clickLoginRegister()
-                .fillName(name)
-                .fillEmail(faker.internet().emailAddress())
+                .fillName(firstUser.getName())
+                .fillEmail(firstUser.getEmail())
                 .clickSignUpBtn(SignUpPage.class)
                 .waitForPageLoaded()
                 .signUpNewUser(firstUser)
                 .waitForPageLoaded()
                 .clickContinueBtn()
-                .loggedAsUserNameVisible(name)
+                .verifyLoggedAsUserNameVisible(firstUser.getName())
                 .clickCartBtn()
                 .clickProceedCheckout()
                 .verifyAddressDetailsText()
@@ -43,29 +45,28 @@ public class PlaceOrderTest extends BaseWebTest {
                 .fillPaymentOrder()
                 .clickPayAndConfirmOrder()
                 .verifyCongratulationsYourOrderHasBeenConfirmed()
-                .deleteAccountClick()
+                .clickDeleteAccount()
                 .waitForPageLoaded();
-
     }
 
     @Test
     @DisplayName("Place Order: Login before Checkout")
+    @Owner("Aidai")
     @Tag("Test case: 15")
     public void PlaceOrderLoginBeforeCheckout() {
-        String name = "Aidai";
+
         User firstUser = UserGenerated.randomUser();
         var productName = "Blue Top";
-        Faker faker = new Faker();
         open("", HomePage.class)
                 .waitForPageLoaded()
-                .clickSignupLoginBtn()
+                .switchBetweenSection(SIGN_IN_LOGIN, LoginPage.class)
                 .waitForPageLoaded()
-                .fillName(name)
-                .fillEmail(faker.internet().emailAddress())
+                .fillName(firstUser.getName())
+                .fillEmail(firstUser.getEmail())
                 .clickSignUpBtn(SignUpPage.class)
                 .signUpNewUser(firstUser)
                 .clickContinueBtn()
-                .loggedAsUserNameVisible(name)
+                .verifyLoggedAsUserNameVisible(firstUser.getName())
                 .addProductToCart(productName)
                 .clickCartBtn()
                 .waitForPageLoaded()
@@ -77,9 +78,7 @@ public class PlaceOrderTest extends BaseWebTest {
                 .fillPaymentOrder()
                 .clickPayAndConfirmOrder()
                 .verifyCongratulationsYourOrderHasBeenConfirmed()
-                .deleteAccountClick()
+                .clickDeleteAccount()
                 .waitForPageLoaded();
-
     }
 }
-

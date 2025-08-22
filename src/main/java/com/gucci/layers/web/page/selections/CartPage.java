@@ -101,11 +101,8 @@ public class CartPage extends BasePage<CartPage> {
         return page(PaymentPage.class);
     }
     public String getProductQuantity(String productName) {
-        SelenideElement quantityInput = $$x("//td[@class='cart_description']//h4/a")
-                .findBy(Condition.exactText(productName))
-                .closest("tr")
-                .$x(".//td[@class='cart_quantity']/button");
-        return quantityInput.getValue();
+        SelenideElement quantityInput = $x("//td[@class='cart_description']//a[text()='"+productName+"']/ancestor::tr//button");
+        return quantityInput.getText();
     }
 
 }

@@ -3,7 +3,6 @@ import com.gucci.layers.web.page.selections.ContactUsPage;
 import io.qameta.allure.Owner;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
-
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 

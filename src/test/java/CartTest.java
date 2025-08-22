@@ -1,21 +1,21 @@
 import com.gucci.layers.web.page.home.HomePage;
 import com.gucci.layers.web.page.selections.CartPage;
+import io.qameta.allure.Owner;
 import net.datafaker.Faker;
 import org.assertj.core.api.SoftAssertions;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static com.codeborne.selenide.logevents.SelenideLogger.step;
 
 @Tag(Tags.SMOKE)
 @Tag(Tags.WEB)
 public class CartTest extends BaseWebTest {
+
     @Test
     @DisplayName("Test Case 11: Verify Subscription in Cart page ")
+    @Owner("Aidai")
     @Tag("Test Case 11")
     public void verifySubscriptionInCartTest() {
 
@@ -30,23 +30,21 @@ public class CartTest extends BaseWebTest {
                     softly.assertThat(homePage.subscriptionText)
                             .as("verify subscription text")
                             .isEqualTo("Subscription");
-
                 }
         );
         step("Проверка присутствия текста you have been successfully subscribed!", () -> {
                     softly.assertThat(homePage.subscribedSuccess)
                             .as("verify you have been successfully subscribed")
                             .isEqualTo("You have been successfully subscribed!");
-
-                }
-        );
-
+                });
     }
 
     @Test
     @DisplayName("Test Case 12: Add Products in Cart")
+    @Owner("Aidai")
     @Tag("Test Case 12")
     public void verifyCartDetailsTest() {
+
         SoftAssertions softly = new SoftAssertions();
         String product1 = "Blue Top";
         String product2 = "Men Tshirt";
@@ -78,9 +76,6 @@ public class CartTest extends BaseWebTest {
                     .as("Verify product totals")
                     .containsExactlyInAnyOrderElementsOf(expectedTotals);
         });
-
         softly.assertAll();
     }
 }
-
-

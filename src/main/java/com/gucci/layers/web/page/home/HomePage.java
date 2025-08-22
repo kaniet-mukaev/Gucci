@@ -13,11 +13,14 @@ import com.gucci.layers.web.page.signup_login.LoginPage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$x;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HomePage extends BasePage<HomePage> {
     public SelenideElement header = $(By.id("header"));
@@ -42,6 +45,7 @@ public class HomePage extends BasePage<HomePage> {
     public SelenideElement inputSubscriptionEmail = single_widget.$("input[id='susbscribe_email']");
     public SelenideElement subscriptionBtn = single_widget.$("button");
     public SelenideElement subscriptionHeader = $x("//div[@class='alert-success alert']");
+
 
     @Override
     public HomePage waitForPageLoaded() {
@@ -167,7 +171,22 @@ public class HomePage extends BasePage<HomePage> {
         elementManager.click(signupLoginBtn);
         return page(LoginPage.class);
     }
+
+    @Step("get product name")
+    public SelenideElement getProductName(String productName) {
+        SelenideElement productByName = $x("//div[@class='productinfo text-center']/p[contains(text(),'Blue Top')]");
+        return productByName;
+
+    }
+
+    @Step("get product price")
+    public SelenideElement getProductPrice(String productName) {
+        SelenideElement productByPrice = $x("(//div[@class='productinfo text-center']/h2[contains(text(),'Rs. 500')])[1]");
+        return productByPrice;
+    }
 }
+
+
 
 
 
