@@ -60,6 +60,7 @@ public class LoginPage extends BasePage<LoginPage> {
         return this;
     }
 
+    @Step("Input login email, input login password and click login Button")
     public <T extends BasePage<T>> T loginUser(String email, String password, Class<T> nextPageClas) {
         elementManager.input(loginEmail, email);
         elementManager.input(loginPassword, password);
@@ -68,16 +69,19 @@ public class LoginPage extends BasePage<LoginPage> {
         return Selenide.page(nextPageClas);
     }
 
+    @Step("Click home button")
     public HomePage clickHome() {
         elementManager.click(homeBtn);
         return Selenide.page(HomePage.class);
     }
 
+    @Step("Verify login with incorrect parameters")
     public LoginPage paramsIncorrectErrorMessage() {
         incorrectParamsMessage.shouldHave(Condition.exactText("Your email or password is incorrect!"));
         return this;
     }
 
+    @Step("Verify email already exist message")
     public LoginPage verifyEmailAddressAlreadyExistMessage() {
         emailAddressAlreadyExistMessage.shouldHave(Condition.exactText("Email Address already exist!"));
         return this;

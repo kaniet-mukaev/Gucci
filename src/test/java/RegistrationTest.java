@@ -3,12 +3,12 @@ import com.gucci.entities.UserGenerated;
 import com.gucci.layers.web.page.home.HomePage;
 import com.gucci.layers.web.page.signup_login.LoginPage;
 import com.gucci.layers.web.page.signup_login.SignUpPage;
-import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import static com.gucci.data.Sections.SIGN_IN_LOGIN;
 
 @Tag(Tags.SMOKE)
 @Tag(Tags.WEB)
@@ -17,17 +17,14 @@ public class RegistrationTest extends BaseWebTest {
     @Test()
     @DisplayName("Test Case 1: Register User")
     @Owner("Aliia")
-    @Tag("Test Case 1")//идентификатор
-    @Link("https://automationexercise.com/test_cases")
+    @Tag("Test Case 1")
     public void registerNewUserTest() {
 
         User firstUser = UserGenerated.randomUser();
-        SoftAssertions softly = new SoftAssertions();
 
-
-        var homePage = open("", HomePage.class)
+        open("", HomePage.class)
                 .waitForPageLoaded()
-                .switchBetweenSection("Signup / Login", LoginPage.class)
+                .switchBetweenSection(SIGN_IN_LOGIN, LoginPage.class)
                 .waitForPageLoaded()
                 .fillName(firstUser.getName())
                 .fillEmail(firstUser.getEmail())
@@ -36,30 +33,23 @@ public class RegistrationTest extends BaseWebTest {
                 .signUpNewUser(firstUser)
                 .waitForPageLoaded()
                 .clickContinueBtn()
-                .loggedAsUserNameVisible(firstUser.getName())
-                .deleteAccountClick()
+                .verifyLoggedAsUserNameVisible(firstUser.getName())
+                .clickDeleteAccount()
                 .waitForPageLoaded()
                 .clickContinue();
-
-//        softly.assertThat("Hello")
-//                .as("Check greeting")
-//                .isEqualTo("Hi");
-//
-//        softly.assertAll();
-
     }
 
-    @Link("https://automationexercise.com/test_cases")
+    @Test()
     @DisplayName("Test Case 5: Register User with existing email")
     @Owner("Aliia")
-    @Test()
+    @Tag("Test Case 5")
     public void registerUserWithExistingEmailTest() {
 
         User firstUser = UserGenerated.randomUser();
 
-        var homePage = open("", HomePage.class)
+       open("", HomePage.class)
                 .waitForPageLoaded()
-                .switchBetweenSection("Signup / Login", LoginPage.class)
+                .switchBetweenSection(SIGN_IN_LOGIN, LoginPage.class)
                 .waitForPageLoaded()
                 .fillName(firstUser.getName())
                 .fillEmail(firstUser.getEmail())
@@ -68,7 +58,7 @@ public class RegistrationTest extends BaseWebTest {
                 .signUpNewUser(firstUser)
                 .waitForPageLoaded()
                 .clickContinueBtn()
-                .loggedAsUserNameVisible(firstUser.getName())
+                .verifyLoggedAsUserNameVisible(firstUser.getName())
                 .clickLogout()
                 .waitForPageLoaded()
                 .fillName(firstUser.getName())
