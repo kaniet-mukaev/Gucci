@@ -3,12 +3,11 @@ import com.gucci.layers.web.page.selections.ContactUsPage;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 
-//@Tag(Tags.SMOKE)
-//@Tag(Tags.WEB)
 public class ContactUsTest extends BaseWebTest {
 
     @Test

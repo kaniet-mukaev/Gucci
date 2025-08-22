@@ -59,10 +59,4 @@ public class ElementManager {
                 .selectOption(text);
         return this;
     }
-
-//    public ElementManager scrollToElement(SelenideElement element) {
-//        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
-//        js.executeScript("arguments[0].scrollIntoView(true);", element);
-//        return this;
-//    }
 }
