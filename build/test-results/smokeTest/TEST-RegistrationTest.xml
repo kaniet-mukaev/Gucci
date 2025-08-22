@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="RegistrationTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-08-22T05:46:33.925Z" hostname="MacBook-Pro-Aliya.local" time="14.31">
+  <properties/>
+  <testcase name="Test Case 5: Register User with existing email" classname="RegistrationTest" time="12.595"/>
+  <testcase name="Test Case 1: Register User" classname="RegistrationTest" time="9.906"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
