@@ -5,9 +5,8 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.gucci.layers.web.page.BasePage;
 import com.gucci.layers.web.page.home.HomePage;
-
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+
 
 public class DeleteAccountPage extends BasePage<DeleteAccountPage> {
 

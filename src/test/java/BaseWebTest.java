@@ -11,7 +11,6 @@ import static com.gucci.config.ConfigurationManager.getAppConfig;
 public class BaseWebTest {
 
     private final String BASE_URL = getAppConfig().baseUrl();
-
     public <T> T open(String endPoint, Class<T> clazz) {
         return Selenide.open(String.format("%s/%s", BASE_URL, endPoint), clazz);
     }
