@@ -1,5 +1,5 @@
 import com.gucci.layers.web.page.home.HomePage;
-import com.gucci.layers.web.page.selections.TestCasesPage;
+import io.qameta.allure.Owner;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -7,10 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 
+@Tag(Tags.SMOKE)
+@Tag(Tags.WEB)
 public class VerifySubscriptionInHomeTest extends BaseWebTest {
 
     @Test
     @DisplayName("Test Case 10: Verify Subscription in home page")
+    @Owner("Aliia")
     @Tag("Test Case 10")
     public void testCasesTest() {
 
@@ -33,6 +36,5 @@ public class VerifySubscriptionInHomeTest extends BaseWebTest {
                     .as("subscriptionHeader text")
                     .isEqualTo("You have been successfully subscribed!c");
         });
-
     }
 }

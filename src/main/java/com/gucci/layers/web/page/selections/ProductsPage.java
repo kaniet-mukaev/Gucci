@@ -16,7 +16,7 @@ public class ProductsPage extends BasePage<ProductsPage> {
     public SelenideElement featuresItemsForm = $(".features_items");
     public SelenideElement allProductsHeader = featuresItemsForm.$("h2[class='title text-center']");
     public ElementsCollection products = featuresItemsForm.$$x("div[class='col-sm-4']");
-    public SelenideElement viewProductBtn1 = featuresItemsForm.$("div[class='col-sm-4'] a[href='/product_details/1']");
+    public SelenideElement viewProductBtn1 = $x("//a[@href='/product_details/1']");
     public SelenideElement searchInput = $("input[name='search']");
     public SelenideElement searchBtn = $("input[name='search'] + button");
 
@@ -29,11 +29,12 @@ public class ProductsPage extends BasePage<ProductsPage> {
         return this;
     }
 
-    @Step("сlick view product ")
-     public ProductDetail clickViewProduct() {
-        elementManager.click(viewProductBtn1);
+    @Step("click view product")
+    public ProductsPage.ProductDetail clickViewProduct(String productName) {
+        SelenideElement element = $x("//p[normalize-space(text())='" + productName + "']/ancestor::div[contains(@class,'product')]//a[text()='View Product']");
+        element.scrollTo().shouldBe(Condition.visible).click();
         return Selenide.page(ProductDetail.class);
-     }
+    }
 
     @Step("fill search input")
      public ProductsPage fillSearchInput(String text) {
