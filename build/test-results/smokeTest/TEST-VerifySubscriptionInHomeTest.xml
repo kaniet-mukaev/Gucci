@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="VerifySubscriptionInHomeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-08-22T05:46:23.952Z" hostname="MacBook-Pro-Aliya.local" time="6.877">
+  <properties/>
+  <testcase name="Test Case 10: Verify Subscription in home page" classname="VerifySubscriptionInHomeTest" time="6.877"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

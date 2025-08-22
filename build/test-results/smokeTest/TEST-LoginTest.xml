@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="LoginTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-08-22T05:46:34.906Z" hostname="MacBook-Pro-Aliya.local" time="13.281">
+  <properties/>
+  <testcase name="Test Case 3: Login User with incorrect email and password" classname="LoginTest" time="4.111"/>
+  <testcase name="Test Case 2: Login User with correct email and password" classname="LoginTest" time="21.698"/>
+  <testcase name="Test Case 4: Logout User" classname="LoginTest" time="9.166"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
