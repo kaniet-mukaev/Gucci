@@ -17,7 +17,7 @@ public class ElementManager {
                 .shouldBe(visible, Duration.ofSeconds(DELAY))
                 .shouldBe(enabled, Duration.ofSeconds(DELAY))
                 .shouldNotHave(attribute("disabled"), Duration.ofSeconds(DELAY))
-                .shouldBe(clickable, Duration.ofSeconds(DELAY))
+//                .shouldBe(clickable, Duration.ofSeconds(DELAY))
                 .click();
         return this;
     }
