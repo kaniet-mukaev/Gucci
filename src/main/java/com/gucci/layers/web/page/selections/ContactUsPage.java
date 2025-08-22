@@ -1,8 +1,11 @@
 package com.gucci.layers.web.page.selections;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.gucci.layers.web.page.BasePage;
+import com.gucci.layers.web.page.home.HomePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -26,5 +29,33 @@ public class ContactUsPage extends BasePage<ContactUsPage> {
     public ContactUsPage waitForPageLoaded() {
         getInTouchHeader.shouldHave(Condition.exactText("Get In Touch"));
         return this;
+    }
+
+    @Step("Enter name, email, subject and message")
+    public ContactUsPage fillContactUsForm(String name, String email, String subject, String message) {
+        elementManager.input(inputName, name)
+                .input(inputEmail, email)
+                .input(inputSubject, subject)
+                .input(inputMessage, message)
+                .input(uploadFile, "/Users/aliyaalymbekova/Desktop/Gucci/src/main/java/com/gucci/data/Снимок экрана 2025-08-13 в 13.37.42.png");
+        return this;
+    }
+
+    @Step("Click Submit btn")
+    public ContactUsPage clickSubmit() {
+        elementManager.click(submitBtn);
+        return this;
+    }
+
+    @Step("accept alert")
+    public ContactUsPage clickAlertAccept() {
+        alertHelper.acceptAlertIfPresented();
+        return this;
+    }
+
+    @Step("click home btn")
+    public HomePage clickHome() {
+        elementManager.click(homeBtn);
+        return Selenide.page(HomePage.class);
     }
 }
