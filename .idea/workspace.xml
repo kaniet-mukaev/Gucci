@@ -5,34 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f520b343-4b6b-4453-9724-491c8a647101" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/PlaceOrderTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/PlaceOrderTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/default-package.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/default-package.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-PlaceOrderTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-PlaceOrderTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/CartTest.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/LoginTest.class.uniqueId3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/PlaceOrderTest.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/ProductsDetailsTest.class.uniqueId4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/RegistrationTest.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/data/Generated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/data/Generated.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/entities/UserGenerated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/entities/UserGenerated.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme/commonStyle.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gucci/data/Sections.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gucci/enums/ProductCondition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gucci/helper/AlertHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/AllProductAndProductDetailsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ContactUsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/SearchProductTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/TestCasesTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/VerifySubscriptionInHomeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/manager/ElementManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/manager/ElementManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/BasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/home/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/home/HomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/CartPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/CartPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/PaymentPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/PaymentPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/ProductDetailsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/ProductDetailsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/ContactUsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/ContactUsPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/ProductsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/ProductsPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/AccountCreatedPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/AccountCreatedPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/DeleteAccountPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/DeleteAccountPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/SignUpPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/SignUpPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/TestCasesPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/selections/TestCasesPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gucci/layers/web/page/signup_login/LoginPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BaseWebTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BaseWebTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CartTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CartTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/PlaceOrderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PlaceOrderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ProductsDetailsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProductsDetailsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/LoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/LoginTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/RegistrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/RegistrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +95,7 @@
     "JUnit.PlaceOrderTest.registerWhileCheckout.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "aidai",
+    "git-widget-placeholder": "Merging aidai",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
