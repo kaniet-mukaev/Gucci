@@ -5,9 +5,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.gucci.layers.web.page.BasePage;
 import com.gucci.layers.web.page.home.HomePage;
-
 import java.time.Duration;
-
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 

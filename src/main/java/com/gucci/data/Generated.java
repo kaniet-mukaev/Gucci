@@ -1,12 +1,14 @@
-package com.gucci.entities;
+package com.gucci.data;
 
+import com.gucci.entities.User;
 import com.gucci.enums.Country;
 import net.datafaker.Faker;
+
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class UserGenerated {
+public class Generated {
 
     private static final Faker faker = new Faker(new Locale("en"));
 
@@ -15,10 +17,8 @@ public class UserGenerated {
         String formattedBirthday = new SimpleDateFormat("dd/MMMM/yyyy", Locale.ENGLISH)
                 .format(faker.date().birthday(18, 65));
 
-        return User.builder()
+        return com.gucci.entities.User.builder()
                 .title(faker.options().option("Mr", "Mrs"))
-                .firstName(faker.name().firstName())
-                .lastName(faker.name().lastName())
                 .name(faker.name().fullName())
                 .email(faker.internet().emailAddress())
                 .password(faker.internet().password(8, 16))
@@ -40,3 +40,5 @@ public class UserGenerated {
         return countries[randomIndex];
     }
 }
+
+
