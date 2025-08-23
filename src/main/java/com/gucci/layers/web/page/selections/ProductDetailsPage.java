@@ -9,18 +9,17 @@ import java.time.Duration;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ProductDetailsPage extends BasePage<ProductDetailsPage> {
+
     public SelenideElement writeYourReview = $x("//a[@href='#reviews']");
     public SelenideElement increaseQuantity = $x("//input[@id = 'quantity']");
     public SelenideElement addToCart = $x("//button[@class='btn btn-default cart']");
     public SelenideElement viewCartBtn = $x("//a[@href='/view_cart']/u[text()='View Cart']");
-
 
     @Override
     public ProductDetailsPage waitForPageLoaded() {
         writeYourReview.shouldHave(Condition.exactText("Write Your Review"));
         return this;
     }
-
 
     @Step("Increase quantity to {0}")
     public ProductDetailsPage increaseQuantity(String quantity) {
