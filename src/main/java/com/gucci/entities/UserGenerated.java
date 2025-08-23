@@ -4,6 +4,7 @@ import com.gucci.enums.Country;
 import net.datafaker.Faker;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class UserGenerated {
@@ -20,7 +21,7 @@ public class UserGenerated {
                 .firstName(faker.name().firstName())
                 .lastName(faker.name().lastName())
                 .name(faker.name().fullName())
-                .email(faker.internet().emailAddress())
+                .email(UUID.randomUUID().toString().substring(0, 10) + "@g")
                 .password(faker.internet().password(8, 16))
                 .dateOfBirth(formattedBirthday)
                 .company(faker.company().name())

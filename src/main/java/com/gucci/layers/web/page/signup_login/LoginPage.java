@@ -11,24 +11,17 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class LoginPage extends BasePage<LoginPage> {
 
-    public SelenideElement header = $("#header");
-
-    public SelenideElement signup_form = $(".signup-form");
-    public SelenideElement newUserSignUpHeader = signup_form.$("h2");
-    public SelenideElement signUpInputName = signup_form.$("input[data-qa='signup-name']");
-    public SelenideElement signUpInputEmail = signup_form.$("input[data-qa='signup-email']");
-    public SelenideElement signUpBtn = signup_form.$("button");
-    public SelenideElement emailAddressAlreadyExistMessage = signup_form.$("p");
-    
-    public SelenideElement login_form = $(".login-form");
-    public SelenideElement loginHeader = login_form.$("h2");
-    public SelenideElement loginEmail = login_form.$("input[data-qa='login-email']");
-    public SelenideElement loginPassword = login_form.$("input[data-qa='login-password']");
-    public SelenideElement loginBtn = login_form.$("button");
-    public SelenideElement incorrectParamsMessage = login_form.$("form p");
-
-    public SelenideElement homeBtn = $("ul a[href='/']");
-
+    public SelenideElement newUserSignUpHeader = $x("//h2[text()='New User Signup!']");
+    public SelenideElement signUpInputName = $x("//input[@name='name']");
+    public SelenideElement signUpInputEmail = $x("//input[@data-qa='signup-email']");
+    public SelenideElement signUpBtn = $x("//button[@data-qa='signup-button']");
+    public SelenideElement emailAddressAlreadyExistMessage = $x("//p[normalize-space(text())='Email Address already exist!']");
+    public SelenideElement loginHeader = $x("//h2[text()='Login to your account']");
+    public SelenideElement loginEmail = $x("//input[@data-qa='login-email']");
+    public SelenideElement loginPassword = $x("//input[@data-qa='login-password']");
+    public SelenideElement loginBtn = $x("//button[@data-qa='login-button']");
+    public SelenideElement incorrectParamsMessage = $x("//p[text()='Your email or password is incorrect!']");
+    public SelenideElement homeBtn = $x("//a[normalize-space(text())='Home']");
 
     @Override
     public LoginPage waitForPageLoaded() {

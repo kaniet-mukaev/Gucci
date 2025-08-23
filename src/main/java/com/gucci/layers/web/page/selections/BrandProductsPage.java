@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.page;
 
 public class BrandProductsPage extends BasePage<BrandProductsPage> {
+
     public SelenideElement brandProductsHeader = $x("//h2[@class='title text-center']");
 
     @Override

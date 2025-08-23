@@ -5,7 +5,6 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.gucci.layers.web.page.BasePage;
 import com.gucci.layers.web.page.signup_login.LoginPage;
-import com.gucci.utils.WaitManager;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import java.util.List;
@@ -13,6 +12,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$$x;
 
 public class CartPage extends BasePage<CartPage> {
+
     public SelenideElement subscriptionHeader = $x("//div[@class='single-widget']/h2");
     public SelenideElement subscribeEmailInput = $(By.id("susbscribe_email"));
     public SelenideElement subscribeEmailBtn = $(By.id("subscribe"));
@@ -27,11 +27,6 @@ public class CartPage extends BasePage<CartPage> {
     public ElementsCollection productTotals = $$x("//td[@class='cart_total']/p");
     public SelenideElement proceedToCheckout = $x("//a[text() = 'Proceed To Checkout']");
     public SelenideElement loginRegister = $x("(//a[@href = '/login'])[2]");
-    public SelenideElement addressDetailsText = $x("(//h2[text()='Address Details'])");
-    public SelenideElement reviewYourOrderText = $x("(//h2[text()='Review Your Order'])");
-    public SelenideElement formControl = $x("(//textarea[@class='form-control'])");
-    public SelenideElement placeOrder = $x("(//a[text() = 'Place Order'])");
-    public SelenideElement quantityInCart = $x(".cart_quantity_input");
     public ElementsCollection deleteProductFromCart = $$x("//a[@class = 'cart_quantity_delete']");
     public SelenideElement cartIsEmptyMessage = $x("//b[text() = 'Cart is empty!']");
 
@@ -69,39 +64,15 @@ public class CartPage extends BasePage<CartPage> {
     }
 
     @Step("click proceed checkout")
-    public CartPage clickProceedCheckout() {
+    public <T>T clickProceedCheckout(Class<T> clazz) {
         elementManager.click(proceedToCheckout);
-        return this;
+        return page(clazz);
     }
 
     @Step("click login register")
     public LoginPage clickLoginRegister() {
         elementManager.click(loginRegister);
         return page(LoginPage.class);
-    }
-
-    @Step("verify address details text ")
-    public CartPage verifyAddressDetailsText() {
-        addressDetailsText.shouldBe(Condition.visible);
-        return this;
-    }
-
-    @Step("verify review your order")
-    public CartPage verifyReviewYourOrderText() {
-        reviewYourOrderText.shouldBe(Condition.visible);
-        return this;
-    }
-
-    @Step("fill form control")
-    public CartPage inputFormControl() {
-        elementManager.input(formControl, "Плохой товар");
-        return this;
-    }
-
-    @Step("click by place order")
-    public PaymentPage clickPlaceOrder() {
-        elementManager.click(placeOrder);
-        return page(PaymentPage.class);
     }
 
     @Step("get product quantity")
@@ -116,6 +87,11 @@ public class CartPage extends BasePage<CartPage> {
         for (SelenideElement element : deleteProductFromCart) {
             elementManager.click(element);
         }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return this;
     }
 
@@ -123,5 +99,12 @@ public class CartPage extends BasePage<CartPage> {
     public CartPage verifyThatProductIsRemovedFromTheCart() {
         cartIsEmptyMessage.shouldHave(Condition.exactText("Cart is empty!"));
         return this;
+    }
+
+    @Step("Verify product '{productName}' is displayed in cart")
+    public CartPage verifyProductInCart(String productName) {
+        $x("//table[@id='cart_info_table']//a[normalize-space(text())='" + productName + "']")
+                .shouldHave(Condition.exactText(productName));
+        return page(CartPage.class);
     }
 }

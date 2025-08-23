@@ -13,7 +13,6 @@ public class SignUpPage extends BasePage<SignUpPage> {
 
     public SelenideElement login_form = $(".login-form");
     public SelenideElement enterAccountInformationHeader = login_form.$("b");
-
     public SelenideElement password = $(By.id("password"));
     public SelenideElement selectDays = $(By.id("days"));
     public SelenideElement selectMonths = $(By.id("months"));
@@ -31,7 +30,6 @@ public class SignUpPage extends BasePage<SignUpPage> {
     public SelenideElement createAccountButton = $x("//button[@data-qa='create-account']");
     public SelenideElement name = $(By.id("name"));
     public SelenideElement email = $(By.id("email"));
-
 
     @Override
     public SignUpPage waitForPageLoaded() {
@@ -58,16 +56,14 @@ public class SignUpPage extends BasePage<SignUpPage> {
         return Selenide.page(AccountCreatedPage.class);
     }
 
-    public SignUpPage selectDateMonthYearCalendar(String dateMonthYear) {
+    private void selectDateMonthYearCalendar(String dateMonthYear) {
         String[] dateMonthYearParts = dateMonthYear.split("/");
-        String day = dateMonthYearParts[0].substring(1);
+        String day = String.valueOf(Integer.parseInt(dateMonthYearParts[0]));
         String month = dateMonthYearParts[1];
         String year = dateMonthYearParts[2];
 
         elementManager.selectByValue(selectDays, day);
         elementManager.selectByValue(selectMonths, month);
         elementManager.selectByValue(selectYears, year);
-        return this;
     }
-
 }

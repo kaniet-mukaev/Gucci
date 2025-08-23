@@ -3,9 +3,7 @@ package com.gucci.layers.web.page.selections;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.gucci.layers.web.page.BasePage;
-import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class TestCasesPage extends BasePage<TestCasesPage> {

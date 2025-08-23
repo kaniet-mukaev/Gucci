@@ -8,6 +8,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class CategoryProductsPage extends BasePage<CategoryProductsPage> {
+
     public SelenideElement womenDressProductsHeader = $x("//h2[text()='Women - Tops Products']");
     public SelenideElement menCategory = $x("//a[@href='#Men']");
     public SelenideElement menTShirtSubCategory = $x("//a[text() = 'Tshirts ']");
