@@ -7,7 +7,6 @@ import com.gucci.layers.web.page.BasePage;
 import com.gucci.layers.web.page.home.HomePage;
 import static com.codeborne.selenide.Selenide.$;
 
-
 public class DeleteAccountPage extends BasePage<DeleteAccountPage> {
 
     public SelenideElement accountDeletedHeader = $("h2[data-qa='account-deleted'] b");

@@ -16,13 +16,11 @@ public class LoginPage extends BasePage<LoginPage> {
     public SelenideElement signUpInputEmail = $x("//input[@data-qa='signup-email']");
     public SelenideElement signUpBtn = $x("//button[@data-qa='signup-button']");
     public SelenideElement emailAddressAlreadyExistMessage = $x("//p[normalize-space(text())='Email Address already exist!']");
-
     public SelenideElement loginHeader = $x("//h2[text()='Login to your account']");
     public SelenideElement loginEmail = $x("//input[@data-qa='login-email']");
     public SelenideElement loginPassword = $x("//input[@data-qa='login-password']");
     public SelenideElement loginBtn = $x("//button[@data-qa='login-button']");
     public SelenideElement incorrectParamsMessage = $x("//p[text()='Your email or password is incorrect!']");
-
     public SelenideElement homeBtn = $x("//a[normalize-space(text())='Home']");
 
     @Override

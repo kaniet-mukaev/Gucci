@@ -13,8 +13,6 @@ import com.gucci.layers.web.page.signup_login.DeleteAccountPage;
 import com.gucci.layers.web.page.signup_login.LoginPage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-
-
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class HomePage extends BasePage<HomePage> {
+
     public SelenideElement header = $(By.id("header"));
     public SelenideElement left_sidebar = $(".left-sidebar");
     public ElementsCollection brands = left_sidebar.$$x(".//div[@class='brands-name']//li[not(span[@class='pull-right'])]");
@@ -30,7 +29,6 @@ public class HomePage extends BasePage<HomePage> {
     public SelenideElement deleteAccountBtn = header.$("a[href='/delete_account']");
     public SelenideElement logoutBtn = header.$("a[href='/logout']");
     public SelenideElement contactUsBtn = header.$("a[href='/contact_us']");
-
     public SelenideElement footer = $("#footer .footer-widget");
     public SelenideElement subscription = footer.$("h2");
     public SelenideElement homeOrange = $x("//a[@href='/' and contains(@style, 'orange')]");
@@ -38,8 +36,6 @@ public class HomePage extends BasePage<HomePage> {
     public SelenideElement cartBtn = $("a[href='/view_cart']");
     public SelenideElement viewCartBtn = $x("//a[@href='/view_cart']/u[text()='View Cart']");
     public SelenideElement continueShopping = $x("//button[text()='Continue Shopping']");
-    public SelenideElement viewProduct = $x("//a[@href='/product_details/1']");
-
     public SelenideElement single_widget = $(".single-widget");
     public SelenideElement single_widgetHeader = single_widget.$("h2");
     public SelenideElement inputSubscriptionEmail = single_widget.$("input[id='susbscribe_email']");
@@ -47,6 +43,9 @@ public class HomePage extends BasePage<HomePage> {
     public SelenideElement subscriptionHeader = $x("//div[@class='alert-success alert']");
     public SelenideElement womenCategory = $x("//a[@href='#Women']");
     public SelenideElement womenTopsSubCategory = $x("//a[text() = 'Tops ']");
+    public SelenideElement recommended_items = $x("//div[@class='recommended_items']//h2[normalize-space(text())='recommended items']");
+    public SelenideElement arrowAtBottom = $x("//i [@class = 'fa fa-angle-up']");
+    public SelenideElement fullFledgedPracticeWebsite = $x("//h2[contains(text(), 'Full-Fledged practice website')]");
 
     @Override
     public HomePage waitForPageLoaded() {
@@ -70,21 +69,6 @@ public class HomePage extends BasePage<HomePage> {
         } catch (Exception e) {
             throw new RuntimeException("Не удалось создать экземпляр " + pageClass.getSimpleName(), e);
         }
-    }
-
-    @Step("click contact us button")
-    public ContactUsPage clickContactUs() {
-        elementManager.click(contactUsBtn);
-        return Selenide.page(ContactUsPage.class);
-    }
-
-    @Step("Get brands")
-    public List<String> getBrands() {
-        List<String> brandsList = new ArrayList<>();
-        for (SelenideElement element : brands) {
-            brandsList.add(elementManager.getText(element));
-        }
-        return brandsList;
     }
 
     @Step("Logged as user name label visible")
@@ -170,18 +154,6 @@ public class HomePage extends BasePage<HomePage> {
         return page(LoginPage.class);
     }
 
-    @Step("get product name")
-    public SelenideElement getProductName(String productName) {
-        SelenideElement productByName = $x("//div[@class='productinfo text-center']/p[contains(text(),'Blue Top')]");
-        return productByName;
-    }
-
-    @Step("get product price")
-    public SelenideElement getProductPrice(String productName) {
-        SelenideElement productByPrice = $x("(//div[@class='productinfo text-center']/h2[contains(text(),'Rs. 500')])[1]");
-        return productByPrice;
-    }
-
     @Step("Click on 'Women' category")
     public HomePage clickWomenCategory() {
         elementManager.click(womenCategory);
@@ -199,10 +171,34 @@ public class HomePage extends BasePage<HomePage> {
         left_sidebar.shouldBe(Condition.visible);
         return this;
     }
+
+    @Step("Scroll to recommended items")
+    public HomePage scrollToRecommendedItems() {
+        $x("//div[@class='recommended_items']").scrollTo();
+        return this;
+    }
+
+    @Step("Verify recommended items")
+    public HomePage verifyRecommendedItems() {
+        recommended_items.shouldHave(Condition.exactText("recommended items"));
+        return this;
+    }
+
+    @Step("Click on arrow at bottom right side to move upward")
+    public HomePage clickOnArrowAtBottomRightSideToMoveUpward() {
+        elementManager.click(arrowAtBottom);
+        return this;
+    }
+
+    @Step("verify Automation Exercise header is visible")
+    public HomePage verifyHeaderIsVisible() {
+        fullFledgedPracticeWebsite.shouldHave(Condition.exactText("Full-Fledged practice website for Automation Engineers"));
+        return this;
+    }
+
+    @Step("Scroll to header Automation Exercise")
+    public HomePage scrollToHeader() {
+        fullFledgedPracticeWebsite.scrollTo();
+        return this;
+    }
 }
-
-
-
-
-
-

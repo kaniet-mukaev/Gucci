@@ -33,6 +33,7 @@ public class ProductsDetailsTest extends BaseWebTest {
                     .as("Проверка количества товара")
                     .isEqualTo("4");
         });
+
         softly.assertAll();
     }
 }
