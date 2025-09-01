@@ -33,7 +33,7 @@ allure {
 repositories {
     mavenCentral()
 }
-val allureVersion = "2.25.0"
+val allureVersion = "2.29.1"
 val ownerVersion = "1.0.9"
 val jacksonVersion = "2.17.0"
 val assertjVersion = "3.22.0"
