@@ -73,18 +73,16 @@ pipeline {
       junit 'build/test-results/smokeTest/*.xml'
       archiveArtifacts artifacts: 'build/allure-results/**', fingerprint: true
       archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
-      archiveArtifacts artifacts: 'allure-report/widgets/*.png', fingerprint: true
 
       // Публикация Allure в Jenkins
       allure includeProperties: false, results: [[path: 'build/allure-results']]
 
-      // Slack-уведомление (два блока: картинка + текст)
+      // Slack-уведомление (только текст, без картинок)
       withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_WEBHOOK')]) {
         sh '''#!/usr/bin/env bash
           set -euo pipefail
 
           REPORT_URL="${BUILD_URL}allure"
-          IMAGE_URL="${BUILD_URL}artifact/allure-report/widgets/chart.png"
 
           if [ ! -f allure-report/widgets/summary.json ]; then
             echo "❌ summary.json не найден, Slack уведомление пропущено"
@@ -99,37 +97,9 @@ pipeline {
           TOTAL=$(echo $STATS | jq -r '.total')
           DURATION=$(jq -r '.time.duration' allure-report/widgets/summary.json)
 
-          PAYLOAD=$(cat <<JSON
-{
-  "attachments": [
-    {
-      "fallback": "Allure Report Chart",
-      "image_url": "${IMAGE_URL}"
-    },
-    {
-      "fallback": "Allure Report",
-      "color": "#36a64f",
-      "title": "Allure Report",
-      "title_link": "${REPORT_URL}",
-      "text": "*Results:*\\n*Environment:* env\\n*Comment:* some comment\\n*Duration:* ${DURATION}\\n*Total scenarios:* ${TOTAL}",
-      "fields": [
-        { "title": "✅ Passed",  "value": "${PASSED}",  "short": true },
-        { "title": "❌ Broken",  "value": "${BROKEN}",  "short": true },
-        { "title": "⛔ Failed",  "value": "${FAILED}",  "short": true },
-        { "title": "⚪ Skipped", "value": "${SKIPPED}", "short": true }
-      ]
-    }
-  ]
-}
-JSON
-)
+          MESSAGE="*Allure Report*\\nSmoke Tests завершены. Итог: ${TOTAL} тестов\\n*Duration:* ${DURATION}\\n\\n✅ Passed: ${PASSED}\\n❌ Broken: ${BROKEN}\\n⛔ Failed: ${FAILED}\\n⚪ Skipped: ${SKIPPED}\\n\\n📊 Отчёт: ${REPORT_URL}"
 
-          curl -sSf -H 'Content-type: application/json' --data "$PAYLOAD" "$SLACK_WEBHOOK" >/dev/null || {
-            echo "Slack webhook failed, sending text fallback…"
-            curl -sS -H 'Content-type: application/json' \
-                 --data "{\\"text\\":\\"📊 Allure Report: ${REPORT_URL}\\n✅ Passed: ${PASSED}\\n❌ Broken: ${BROKEN}\\n⛔ Failed: ${FAILED}\\n⚪ Skipped: ${SKIPPED}\\"}" \
-                 "$SLACK_WEBHOOK" >/dev/null || true
-          }
+          curl -sSf -H 'Content-type: application/json' --data "{\\"text\\": \\"${MESSAGE}\\"}" "$SLACK_WEBHOOK" >/dev/null || true
         '''
       }
     }
