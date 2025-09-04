@@ -7,7 +7,7 @@ pipeline {
     }
 
     tools {
-       gradle 'Gradle 7.0'
+       gradle 'Gradle 7'
     }
 
     environment {
