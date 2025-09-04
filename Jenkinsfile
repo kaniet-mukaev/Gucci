@@ -1,56 +1,53 @@
 pipeline {
     agent any
 
-    triggers {
-        cron('0 2 * * 1-5') // запуск в 02:00 с понедельника по пятницу
+    tools {
+        gradle 'Gradle' // имя Gradle из Jenkins Global Tool Configuration
+    }
+
+    environment {
+        SLACK_TOKEN = 'xoxb-1234567890-abcdef' // твой токен
     }
 
     stages {
-        stage('Checkout') {
+        stage('Build & Test') {
             steps {
-                git branch: 'kaniet', url: 'https://github.com/kaniet-mukaev/Gucci.git'
+                sh './gradlew clean test'
             }
         }
 
-        stage('Run Tests') {
+        stage('Generate Allure Report') {
             steps {
-                sh './gradlew clean smokeTest'
-            }
-            post {
-                always {
-                    // JUnit (чтобы Jenkins понимал количество тестов)
-                    junit 'build/test-results/smokeTest/*.xml'
-
-                    // Allure (чтобы был красивый отчёт)
-                    allure([
-                        includeProperties: false,
-                        jdk: '',
-                        results: [[path: 'build/allure-results']]
-                    ])
-                }
-            }
-        }
-
-        stage('Send Allure Report to Slack') {
-            steps {
-                sh '''
-                    if [ ! -f allure-notifications-4.8.0.jar ]; then
-                        echo "❌ JAR файл не найден в корне проекта!"
-                        exit 1
-                    fi
-
-                    java -DconfigFile=notifications/config.json -jar allure-notifications-4.8.0.jar
-                '''
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    results: [[path: 'build/allure-results']]
+                ])
             }
         }
     }
 
     post {
+        always {
+            echo "📦 Архивируем артефакты и Allure отчёты"
+            junit 'build/test-results/test/*.xml'
+            archiveArtifacts artifacts: 'build/allure-results/**', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'allure-report/**', allowEmptyArchive: true
+
+            echo "📤 Отправляем отчёт в Slack"
+            sh """
+                curl -F file=@allure-report/index.html \
+                     -F "initial_comment=Allure Report for build #${env.BUILD_NUMBER}" \
+                     -F channels=#your-slack-channel \
+                     -H "Authorization: Bearer ${SLACK_TOKEN}" \
+                     https://slack.com/api/files.upload
+            """
+        }
         success {
-            echo '✅ Pipeline успешно завершён'
+            echo "✅ Pipeline успешно завершён"
         }
         failure {
-            echo '❌ Pipeline упал, проверь логи'
+            echo "❌ Pipeline упал, но Allure отчёт и Slack отправлены"
         }
     }
 }
