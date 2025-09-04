@@ -57,9 +57,10 @@ pipeline {
     post {
         always {
             echo "📦 Архивируем артефакты и Allure отчёты"
-            junit 'build/test-results/test/*.xml'
+            // правильный путь для smokeTest
+            junit 'build/test-results/smokeTest/*.xml'
             archiveArtifacts artifacts: 'build/allure-results/**', fingerprint: true
-            archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+            archiveArtifacts artifacts: 'build/reports/allure-report/**', fingerprint: true
         }
     }
 }
