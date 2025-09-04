@@ -7,7 +7,7 @@ pipeline {
     }
 
     tools {
-        gradle 'Gradle'
+        gradle 'Gradle' // имя из Global Tool Configuration
     }
 
     stages {
@@ -48,6 +48,7 @@ pipeline {
 
         stage('Send Telegram Notification') {
             steps {
+                // шлёт и картинку, и статистику в TG
                 sh '''
                     java -DconfigFile=notifications/config.json \
                          -jar ../allure-notifications-4.8.0.jar
@@ -57,21 +58,46 @@ pipeline {
 
         stage('Send Slack Notification (Webhook)') {
             steps {
-                sh '''
-                  curl -X POST -H 'Content-type: application/json' \
-                  --data "{
-                    \\"attachments\\": [
-                      {
-                        \\"fallback\\": \\"Allure Report\\",
-                        \\"color\\": \\"#36a64f\\",
-                        \\"title\\": \\"Allure Report\\",
-                        \\"title_link\\": \\"${BUILD_URL}\\",
-                        \\"text\\": \\"Smoke Tests завершены. Duration: 00:04:15. Ссылка ниже 👇\\",
-                        \\"image_url\\": \\"${BUILD_URL}artifact/build/reports/allure-report/allureReport/widgets/summary.png\\"
-                      }
-                    ]
-                  }" \
-                  https://hooks.slack.com/services/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
+                // читаем URL из файла вне репозитория; не печатаем значение в логи
+                sh '''#!/usr/bin/env bash
+                  set -euo pipefail
+
+                  SLACK_WEBHOOK_URL="$(cat /etc/jenkins-slack/webhook.url)"
+
+                  # Конструируем ссылки
+                  REPORT_URL="${BUILD_URL}allure"
+                  IMAGE_URL="${BUILD_URL}artifact/build/reports/allure-report/allureReport/widgets/summary.png"
+
+                  # JSON грузим через here-doc, чтобы не экранировать кавычки
+                  read -r -d "" PAYLOAD <<'JSON'
+{
+  "attachments": [
+    {
+      "fallback": "Allure Report",
+      "color": "#36a64f",
+      "title": "Allure Report",
+      "title_link": "REPORT_URL_PLACEHOLDER",
+      "text": "Smoke Tests завершены. Ссылка на отчёт ниже 👇",
+      "image_url": "IMAGE_URL_PLACEHOLDER"
+    }
+  ]
+}
+JSON
+
+                  # Подставим URLs внутрь payload
+                  PAYLOAD="${PAYLOAD/REPORT_URL_PLACEHOLDER/${REPORT_URL}}"
+                  PAYLOAD="${PAYLOAD/IMAGE_URL_PLACEHOLDER/${IMAGE_URL}}"
+
+                  # Отправляем. В логах будет виден только $SLACK_WEBHOOK_URL, не реальный URL
+                  curl -sSf -X POST -H 'Content-type: application/json' \
+                       --data "$PAYLOAD" \
+                       "$SLACK_WEBHOOK_URL" >/dev/null || {
+                    echo "Slack webhook send failed (text fallback)..."
+                    # Фолбек: хотя бы текст
+                    curl -sS -X POST -H 'Content-type: application/json' \
+                         --data "{\"text\":\"📊 Allure Report: ${REPORT_URL}\"}" \
+                         "$SLACK_WEBHOOK_URL" >/dev/null || true
+                  }
                 '''
             }
         }
