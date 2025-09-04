@@ -18,8 +18,15 @@ pipeline {
             }
             post {
                 always {
-                    junit 'build/test-results/test/*.xml'
-                    archiveArtifacts artifacts: 'build/allure-results/**', allowEmptyArchive: true
+                    // JUnit (чтобы Jenkins понимал количество тестов)
+                    junit 'build/test-results/smokeTest/*.xml'
+
+                    // Allure (чтобы был красивый отчёт)
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        results: [[path: 'build/allure-results']]
+                    ])
                 }
             }
         }
