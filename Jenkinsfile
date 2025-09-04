@@ -73,12 +73,12 @@ pipeline {
       junit 'build/test-results/smokeTest/*.xml'
       archiveArtifacts artifacts: 'build/allure-results/**', fingerprint: true
       archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
-      archiveArtifacts artifacts: 'allure-report/widgets/*', fingerprint: true
+      archiveArtifacts artifacts: 'allure-report/widgets/*.png', fingerprint: true
 
       // Публикация Allure в Jenkins
       allure includeProperties: false, results: [[path: 'build/allure-results']]
 
-      // Slack-уведомление
+      // Slack-уведомление (два блока: картинка + текст)
       withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_WEBHOOK')]) {
         sh '''#!/usr/bin/env bash
           set -euo pipefail
@@ -101,20 +101,25 @@ pipeline {
 
           PAYLOAD=$(cat <<JSON
 {
-  "attachments": [{
-    "fallback": "Allure Report",
-    "color": "#36a64f",
-    "title": "Allure Report",
-    "title_link": "${REPORT_URL}",
-    "text": "*Results:*\\n*Environment:* env\\n*Comment:* some comment\\n*Duration:* ${DURATION}\\n*Total scenarios:* ${TOTAL}",
-    "fields": [
-      { "title": "✅ Passed",  "value": "${PASSED}",  "short": true },
-      { "title": "❌ Broken",  "value": "${BROKEN}",  "short": true },
-      { "title": "⛔ Failed",  "value": "${FAILED}",  "short": true },
-      { "title": "⚪ Skipped", "value": "${SKIPPED}", "short": true }
-    ],
-    "image_url": "${IMAGE_URL}"
-  }]
+  "attachments": [
+    {
+      "fallback": "Allure Report Chart",
+      "image_url": "${IMAGE_URL}"
+    },
+    {
+      "fallback": "Allure Report",
+      "color": "#36a64f",
+      "title": "Allure Report",
+      "title_link": "${REPORT_URL}",
+      "text": "*Results:*\\n*Environment:* env\\n*Comment:* some comment\\n*Duration:* ${DURATION}\\n*Total scenarios:* ${TOTAL}",
+      "fields": [
+        { "title": "✅ Passed",  "value": "${PASSED}",  "short": true },
+        { "title": "❌ Broken",  "value": "${BROKEN}",  "short": true },
+        { "title": "⛔ Failed",  "value": "${FAILED}",  "short": true },
+        { "title": "⚪ Skipped", "value": "${SKIPPED}", "short": true }
+      ]
+    }
+  ]
 }
 JSON
 )
