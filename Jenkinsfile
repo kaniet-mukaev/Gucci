@@ -71,7 +71,7 @@ pipeline {
                       }
                     ]
                   }" \
-                  https://hooks.slack.com/services/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
+                  https://hooks.slack.com/services/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
                 '''
             }
         }
