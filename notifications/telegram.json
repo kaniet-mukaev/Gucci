@@ -1,12 +1,17 @@
 {
   "base": {
-    "project": "Gucci",
-    "environment": "some env",
+    "project": "${JOB_BASE_NAME}",
+    "environment": "env",
     "comment": "some comment",
-    "reportLink": "",
+    "reportLink": "${BUILD_URL}",
     "language": "en",
-    "allureFolder": "allure-report",
+    "allureFolder": "allure-report/",
     "enableChart": true
+  },
+  "slack": {
+    "token": "xoxb-8649160762915-9458720918534-l6lLxwk6Vzvzln2x9okcvUoK",
+    "chat": "C09D3RA3551",
+    "replyTo": ""
   },
   "telegram": {
     "token": "8031462767:AAG36jU_hDir3thS65PdJu33F_oEmb1kquw",
