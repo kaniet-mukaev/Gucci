@@ -1,6 +1,6 @@
 {
   "base": {
-    "project": "${JOB_BASE_NAME}",
+    "project": "GUCCI",
     "environment": "env",
     "comment": "some comment",
     "reportLink": "${BUILD_URL}",
@@ -9,7 +9,7 @@
     "enableChart": true
   },
   "slack": {
-    "token": "xoxb-8649160762915-9458720918534-NUIZl7qGqwjRyusyeET7aMfl",
+    "token": "xoxb-8649160762915-9463487579252-iqKHrRWPRahTcXPL6Rnz5lnz",
     "chat": "C09D3RA3551",
     "replyTo": ""
   },
