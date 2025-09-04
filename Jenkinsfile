@@ -7,21 +7,18 @@ pipeline {
     }
 
     tools {
-        gradle 'Gradle' // имя из Global Tool Configuration
+        gradle 'Gradle'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Если джоба настроена "Pipeline script from SCM", этот шаг можно убрать,
-                // но оставим, чтобы явно взять ветку kaniet.
                 git branch: 'kaniet', url: 'https://github.com/kaniet-mukaev/Gucci.git'
             }
         }
 
         stage('Run Smoke Tests') {
             steps {
-                // Не роняем пайплайн при фейлах тестов — даём пройти дальше
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     sh './gradlew clean smokeTest --continue'
                 }
@@ -30,7 +27,6 @@ pipeline {
 
         stage('Generate Allure Report') {
             steps {
-                // Даже если были фейлы — отчёт соберётся
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     sh './gradlew allureReport'
                 }
@@ -50,15 +46,32 @@ pipeline {
             }
         }
 
-        stage('Send Notifications') {
+        stage('Send Telegram Notification') {
             steps {
                 sh '''
-                    # На всякий случай покажем где отчёт (для диагностики)
-                    ls -la build/reports/allure-report || true
-                    ls -la build/reports/allure-report/allureReport || true
-
                     java -DconfigFile=notifications/config.json \
                          -jar ../allure-notifications-4.8.0.jar
+                '''
+            }
+        }
+
+        stage('Send Slack Notification (Webhook)') {
+            steps {
+                sh '''
+                  curl -X POST -H 'Content-type: application/json' \
+                  --data "{
+                    \\"attachments\\": [
+                      {
+                        \\"fallback\\": \\"Allure Report\\",
+                        \\"color\\": \\"#36a64f\\",
+                        \\"title\\": \\"Allure Report\\",
+                        \\"title_link\\": \\"${BUILD_URL}\\",
+                        \\"text\\": \\"Smoke Tests завершены. Duration: 00:04:15. Ссылка ниже 👇\\",
+                        \\"image_url\\": \\"${BUILD_URL}artifact/build/reports/allure-report/allureReport/widgets/summary.png\\"
+                      }
+                    ]
+                  }" \
+                  https://hooks.slack.com/services/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
                 '''
             }
         }
@@ -67,11 +80,8 @@ pipeline {
     post {
         always {
             echo "📦 Архивируем артефакты и Allure отчёты"
-            // Результаты именно smokeTest
             junit 'build/test-results/smokeTest/*.xml'
-            // Сырые результаты Allure
             archiveArtifacts artifacts: 'build/allure-results/**', fingerprint: true
-            // Готовый html-отчёт Gradle Allure Plugin
             archiveArtifacts artifacts: 'build/reports/allure-report/**', fingerprint: true
         }
     }
