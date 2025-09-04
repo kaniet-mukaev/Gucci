@@ -97,28 +97,27 @@ pipeline {
           FAILED=$(echo $STATS | jq -r '.failed')
           SKIPPED=$(echo $STATS | jq -r '.skipped')
           TOTAL=$(echo $STATS | jq -r '.total')
-
           DURATION=$(jq -r '.time.duration' allure-report/widgets/summary.json)
 
           PAYLOAD=$(cat <<JSON
-      {
-        "attachments": [{
-          "fallback": "Allure Report",
-          "color": "#36a64f",
-          "title": "Allure Report",
-          "title_link": "${REPORT_URL}",
-          "text": "*Results:*\\n*Environment:* env\\n*Comment:* some comment\\n*Duration:* ${DURATION}\\n*Total scenarios:* ${TOTAL}",
-          "fields": [
-            { "title": "✅ Passed",  "value": "${PASSED}",  "short": true },
-            { "title": "❌ Broken",  "value": "${BROKEN}",  "short": true },
-            { "title": "⛔ Failed",  "value": "${FAILED}",  "short": true },
-            { "title": "⚪ Skipped", "value": "${SKIPPED}", "short": true }
-          ],
-          "image_url": "${IMAGE_URL}"
-        }]
-      }
-      JSON
-      )
+{
+  "attachments": [{
+    "fallback": "Allure Report",
+    "color": "#36a64f",
+    "title": "Allure Report",
+    "title_link": "${REPORT_URL}",
+    "text": "*Results:*\\n*Environment:* env\\n*Comment:* some comment\\n*Duration:* ${DURATION}\\n*Total scenarios:* ${TOTAL}",
+    "fields": [
+      { "title": "✅ Passed",  "value": "${PASSED}",  "short": true },
+      { "title": "❌ Broken",  "value": "${BROKEN}",  "short": true },
+      { "title": "⛔ Failed",  "value": "${FAILED}",  "short": true },
+      { "title": "⚪ Skipped", "value": "${SKIPPED}", "short": true }
+    ],
+    "image_url": "${IMAGE_URL}"
+  }]
+}
+JSON
+)
 
           curl -sSf -H 'Content-type: application/json' --data "$PAYLOAD" "$SLACK_WEBHOOK" >/dev/null || {
             echo "Slack webhook failed, sending text fallback…"
