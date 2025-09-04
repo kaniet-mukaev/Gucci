@@ -7,7 +7,7 @@ pipeline {
     }
 
     tools {
-        maven 'Maven 3.9.11'   // Название, как в Jenkins (может отличаться у тебя)
+       gradle 'Gradle 1.6.2'
     }
 
     environment {
