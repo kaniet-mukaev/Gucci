@@ -7,7 +7,7 @@ pipeline {
   }
 
   tools {
-    gradle 'Gradle' // имя из Global Tool Configuration
+    gradle 'Gradle'
   }
 
   stages {
@@ -51,49 +51,51 @@ pipeline {
         sh '''#!/usr/bin/env bash
           set -euo pipefail
 
-          # 1) Подставим реальный BUILD_URL внутрь notifications/config.json
+          # Подставляем реальный BUILD_URL
           sed "s#\\${BUILD_URL}#${BUILD_URL%/}#g" notifications/config.json > notifications/config.resolved.json
 
-          # 2) Урежем болтливые логи
           JAVA_OPTS="${JAVA_OPTS:-} \
             -Dorg.slf4j.simpleLogger.defaultLogLevel=warn \
             -Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog \
             -Dorg.apache.commons.logging.simplelog.log.org.apache.http=warn \
             -Dorg.apache.commons.logging.simplelog.log.org.apache.http.wire=off"
 
-          # 3) Запускаем отправку
           java $JAVA_OPTS -DconfigFile=notifications/config.resolved.json \
                -jar ../allure-notifications-4.8.0.jar
         '''
       }
     }
-  } // 👈 закрыл stages
+  }
 
   post {
     always {
       echo '📦 Архивируем отчёты'
       junit 'build/test-results/smokeTest/*.xml'
       archiveArtifacts artifacts: 'build/allure-results/**', fingerprint: true
-      archiveArtifacts artifacts: 'build/reports/allure-report/**', fingerprint: true
-      archiveArtifacts artifacts: 'build/reports/allure-report/widgets/*', fingerprint: true
-      archiveArtifacts artifacts: 'build/reports/allure-report/widgets/chart.png', fingerprint: true
+      archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+      archiveArtifacts artifacts: 'allure-report/widgets/*', fingerprint: true
 
-
-      // Публикация Allure в Jenkins (даст стабильный ${BUILD_URL}allure)
+      // Публикация Allure в Jenkins
       allure includeProperties: false, results: [[path: 'build/allure-results']]
 
-      // Slack-уведомление после архивирования
+      // Slack-уведомление
       withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_WEBHOOK')]) {
         sh '''#!/usr/bin/env bash
           set -euo pipefail
 
           REPORT_URL="${BUILD_URL}allure"
-          IMAGE_URL="${BUILD_URL}artifact/build/reports/allure-report/widgets/chart.png"
+          IMAGE_URL="${BUILD_URL}artifact/allure-report/widgets/chart.png"
 
-          # Читаем статистику из summary.json
-          STATS=$(cat build/reports/allure-report/widgets/summary.json | jq -r '.statistic')
+          if [ ! -f allure-report/widgets/summary.json ]; then
+            echo "❌ summary.json не найден, Slack уведомление пропущено"
+            exit 0
+          fi
+
+          STATS=$(cat allure-report/widgets/summary.json | jq -r '.statistic')
           PASSED=$(echo $STATS | jq -r '.passed')
           BROKEN=$(echo $STATS | jq -r '.broken')
+          FAILED=$(echo $STATS | jq -r '.failed')
+          SKIPPED=$(echo $STATS | jq -r '.skipped')
           TOTAL=$(echo $STATS | jq -r '.total')
 
           PAYLOAD=$(cat <<JSON
@@ -103,7 +105,7 @@ pipeline {
     "color": "#36a64f",
     "title": "Allure Report",
     "title_link": "${REPORT_URL}",
-    "text": "Smoke Tests завершены. Итог: ${TOTAL} тестов (✅ Passed: ${PASSED}, ❌ Broken: ${BROKEN})",
+    "text": "Smoke Tests завершены. Итог: ${TOTAL} тестов\\n✅ Passed: ${PASSED}\\n❌ Broken: ${BROKEN}\\n⛔ Failed: ${FAILED}\\n⚪ Skipped: ${SKIPPED}",
     "image_url": "${IMAGE_URL}"
   }]
 }
@@ -113,7 +115,7 @@ JSON
           curl -sSf -H 'Content-type: application/json' --data "$PAYLOAD" "$SLACK_WEBHOOK" >/dev/null || {
             echo "Slack webhook failed, sending text fallback…"
             curl -sS -H 'Content-type: application/json' \
-                 --data "{\\"text\\":\\"📊 Allure Report: ${REPORT_URL}\\n✅ Passed: ${PASSED}\\n❌ Broken: ${BROKEN}\\"}" \
+                 --data "{\\"text\\":\\"📊 Allure Report: ${REPORT_URL}\\n✅ Passed: ${PASSED}\\n❌ Broken: ${BROKEN}\\n⛔ Failed: ${FAILED}\\n⚪ Skipped: ${SKIPPED}\\"}" \
                  "$SLACK_WEBHOOK" >/dev/null || true
           }
         '''
