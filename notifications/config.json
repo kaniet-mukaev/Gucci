@@ -5,7 +5,7 @@
     "comment": "some comment",
     "reportLink": "${BUILD_URL}",
     "language": "en",
-    "allureFolder": "allure-report/",
+    "allureFolder": "build/reports/allure-report/allureReport/",
     "enableChart": true
   },
   "slack": {

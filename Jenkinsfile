@@ -2,29 +2,35 @@ pipeline {
     agent any
 
     triggers {
-        // запуск в 02:00 с понедельника по пятницу
+        // 02:00 Пн–Пт
         cron('0 2 * * 1-5')
     }
 
     tools {
-        gradle 'Gradle'
+        gradle 'Gradle' // имя из Global Tool Configuration
     }
 
     stages {
         stage('Checkout') {
             steps {
+                // Если джоба настроена "Pipeline script from SCM", этот шаг можно убрать,
+                // но оставим, чтобы явно взять ветку kaniet.
                 git branch: 'kaniet', url: 'https://github.com/kaniet-mukaev/Gucci.git'
             }
         }
 
         stage('Run Smoke Tests') {
             steps {
-                sh './gradlew clean smokeTest'
+                // Не роняем пайплайн при фейлах тестов — даём пройти дальше
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    sh './gradlew clean smokeTest --continue'
+                }
             }
         }
 
         stage('Generate Allure Report') {
             steps {
+                // Даже если были фейлы — отчёт соберётся
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     sh './gradlew allureReport'
                 }
@@ -47,6 +53,10 @@ pipeline {
         stage('Send Notifications') {
             steps {
                 sh '''
+                    # На всякий случай покажем где отчёт (для диагностики)
+                    ls -la build/reports/allure-report || true
+                    ls -la build/reports/allure-report/allureReport || true
+
                     java -DconfigFile=notifications/config.json \
                          -jar ../allure-notifications-4.8.0.jar
                 '''
@@ -57,9 +67,11 @@ pipeline {
     post {
         always {
             echo "📦 Архивируем артефакты и Allure отчёты"
-            // правильный путь для smokeTest
+            // Результаты именно smokeTest
             junit 'build/test-results/smokeTest/*.xml'
+            // Сырые результаты Allure
             archiveArtifacts artifacts: 'build/allure-results/**', fingerprint: true
+            // Готовый html-отчёт Gradle Allure Plugin
             archiveArtifacts artifacts: 'build/reports/allure-report/**', fingerprint: true
         }
     }
