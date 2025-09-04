@@ -54,7 +54,7 @@ pipeline {
           # 1) Подставим реальный BUILD_URL внутрь notifications/config.json
           sed "s#\\${BUILD_URL}#${BUILD_URL%/}#g" notifications/config.json > notifications/config.resolved.json
 
-          # 2) Урежем болтливые логи, не палим токены/URL
+          # 2) Урежем болтливые логи
           JAVA_OPTS="${JAVA_OPTS:-} \
             -Dorg.slf4j.simpleLogger.defaultLogLevel=warn \
             -Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog \
@@ -75,17 +75,26 @@ pipeline {
       junit 'build/test-results/smokeTest/*.xml'
       archiveArtifacts artifacts: 'build/allure-results/**', fingerprint: true
       archiveArtifacts artifacts: 'build/reports/allure-report/**', fingerprint: true
+      archiveArtifacts artifacts: 'build/reports/allure-report/widgets/*', fingerprint: true
+      archiveArtifacts artifacts: 'build/reports/allure-report/widgets/chart.png', fingerprint: true
+
 
       // Публикация Allure в Jenkins (даст стабильный ${BUILD_URL}allure)
       allure includeProperties: false, results: [[path: 'build/allure-results']]
 
-      // Slack-уведомление после архивирования (картинка доступна по .../artifact/...)
+      // Slack-уведомление после архивирования
       withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_WEBHOOK')]) {
         sh '''#!/usr/bin/env bash
           set -euo pipefail
 
-          REPORT_URL="${BUILD_URL%/}allure"
-          IMAGE_URL="${BUILD_URL}artifact/build/reports/allure-report/allureReport/widgets/summary.png"
+          REPORT_URL="${BUILD_URL}allure"
+          IMAGE_URL="${BUILD_URL}artifact/build/reports/allure-report/widgets/chart.png"
+
+          # Читаем статистику из summary.json
+          STATS=$(cat build/reports/allure-report/widgets/summary.json | jq -r '.statistic')
+          PASSED=$(echo $STATS | jq -r '.passed')
+          BROKEN=$(echo $STATS | jq -r '.broken')
+          TOTAL=$(echo $STATS | jq -r '.total')
 
           PAYLOAD=$(cat <<JSON
 {
@@ -94,7 +103,7 @@ pipeline {
     "color": "#36a64f",
     "title": "Allure Report",
     "title_link": "${REPORT_URL}",
-    "text": "Smoke Tests завершены. Ссылка ниже 👇",
+    "text": "Smoke Tests завершены. Итог: ${TOTAL} тестов (✅ Passed: ${PASSED}, ❌ Broken: ${BROKEN})",
     "image_url": "${IMAGE_URL}"
   }]
 }
@@ -104,7 +113,7 @@ JSON
           curl -sSf -H 'Content-type: application/json' --data "$PAYLOAD" "$SLACK_WEBHOOK" >/dev/null || {
             echo "Slack webhook failed, sending text fallback…"
             curl -sS -H 'Content-type: application/json' \
-                 --data "{\"text\":\"📊 Allure Report: ${REPORT_URL}\"}" \
+                 --data "{\\"text\\":\\"📊 Allure Report: ${REPORT_URL}\\n✅ Passed: ${PASSED}\\n❌ Broken: ${BROKEN}\\"}" \
                  "$SLACK_WEBHOOK" >/dev/null || true
           }
         '''
