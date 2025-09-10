@@ -1,4 +1,5 @@
 import com.gucci.layers.web.page.home.HomePage;
+import com.gucci.utils.WaitManager;
 import io.qameta.allure.Owner;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
@@ -35,5 +36,6 @@ public class ProductsDetailsTest extends BaseWebTest {
         });
 
         softly.assertAll();
+        WaitManager.pauseInSeconds(20);
     }
 }

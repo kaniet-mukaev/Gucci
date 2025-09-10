@@ -13,6 +13,7 @@ import static com.gucci.config.ConfigurationManager.getAppConfig;
 public class BaseWebTest {
 
     private final String BASE_URL = getAppConfig().baseUrl();
+
     @Step("Open the {1}")
     public <T> T open(String endPoint, Class<T> clazz) {
         T page = Selenide.open(String.format("%s/%s", BASE_URL, endPoint), clazz);
