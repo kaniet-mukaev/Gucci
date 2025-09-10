@@ -3,6 +3,7 @@ import com.gucci.entities.UserGenerated;
 import com.gucci.layers.web.page.home.HomePage;
 import com.gucci.layers.web.page.signup_login.LoginPage;
 import com.gucci.layers.web.page.signup_login.SignUpPage;
+import com.gucci.utils.WaitManager;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -44,6 +45,7 @@ public class LoginTest extends BaseWebTest{
                  .clickDeleteAccount()
                  .waitForPageLoaded()
                  .clickContinue();
+        WaitManager.pauseInSeconds(30);
     }
 
     @Test

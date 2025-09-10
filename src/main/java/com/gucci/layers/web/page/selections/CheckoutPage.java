@@ -91,7 +91,7 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         return page(PaymentPage.class);
     }
 
-    @Step("verify address details text ")
+    @Step("verify address details text")
     public CheckoutPage verifyAddressDetailsText() {
         addressDetailsHeader.shouldHave(Condition.exactText("Address Details"));
         return this;

@@ -10,4 +10,10 @@ public interface AppConfig extends Config {
 
     @Key("headless.mode")
     boolean headless();
+
+    @Key("docker.remote")
+    boolean remote();
+
+    @Key("remote.url.docker")
+    String dockerUrl();
 }
