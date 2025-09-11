@@ -40,7 +40,7 @@ public class SignUpPage extends BasePage<SignUpPage> {
     public AccountCreatedPage signUpNewUser(User user) {
         elementManager.click($x("//input[@value='"+ user.getTitle() +"']"))
                 .input(password, user.getPassword());
-        selectDateMonthYearCalendar(user.getDateOfBirth());
+        selectDayMonthYearCalendar(user.getDateOfBirth());
 
         elementManager.input(firstNameInput, user.getFirstName())
                 .input(lastNameInput, user.getLastName())
@@ -56,11 +56,11 @@ public class SignUpPage extends BasePage<SignUpPage> {
         return Selenide.page(AccountCreatedPage.class);
     }
 
-    private void selectDateMonthYearCalendar(String dateMonthYear) {
-        String[] dateMonthYearParts = dateMonthYear.split("/");
-        String day = String.valueOf(Integer.parseInt(dateMonthYearParts[0]));
-        String month = dateMonthYearParts[1];
-        String year = dateMonthYearParts[2];
+    private void selectDayMonthYearCalendar(String dayMonthYear) {
+        String[] dayMonthYearParts = dayMonthYear.split("/");
+        String day = String.valueOf(Integer.parseInt(dayMonthYearParts[0]));
+        String month = dayMonthYearParts[1];
+        String year = dayMonthYearParts[2];
 
         elementManager.selectByValue(selectDays, day);
         elementManager.selectByValue(selectMonths, month);

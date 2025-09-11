@@ -45,7 +45,6 @@ public class LoginTest extends BaseWebTest{
                  .clickDeleteAccount()
                  .waitForPageLoaded()
                  .clickContinue();
-        WaitManager.pauseInSeconds(30);
     }
 
     @Test

@@ -36,6 +36,5 @@ public class ProductsDetailsTest extends BaseWebTest {
         });
 
         softly.assertAll();
-        WaitManager.pauseInSeconds(20);
     }
 }
