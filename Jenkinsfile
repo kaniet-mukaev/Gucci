@@ -9,6 +9,16 @@ pipeline {
     gradle 'Gradle'
   }
 
+  // ==== ПРЕДОХРАНИТЕЛИ (чтоб не зависало) ====
+  options {
+    timeout(time: 30, unit: 'MINUTES')                 // максимум на весь пайплайн
+    disableConcurrentBuilds()                          // запрет параллельных запусков одной джобы
+    buildDiscarder(logRotator(numToKeepStr: '20', artifactNumToKeepStr: '5'))
+    durabilityHint('PERFORMANCE_OPTIMIZED')            // меньше шансов залипания PlaceholderExecutable
+    skipDefaultCheckout(true)                          // мы сами делаем checkout в stage
+    timestamps()
+  }
+
   environment {
     HEADLESS_MODE     = "true"
     DOCKER_REMOTE     = "true"
@@ -17,30 +27,42 @@ pipeline {
 
   stages {
     stage('Checkout') {
+      options { timeout(time: 3, unit: 'MINUTES') }
       steps {
         git branch: 'kaniet', url: 'https://github.com/kaniet-mukaev/Gucci.git'
       }
     }
 
     stage('Docker Grid UP') {
+      options { timeout(time: 5, unit: 'MINUTES') }
       steps {
         sh '''
+          set -euo pipefail
+
           docker compose down -v || true
           docker compose up -d
 
           echo "Waiting for Selenium Grid on :4444 ..."
           for i in {1..30}; do
-            curl -sf http://localhost:4444/status >/dev/null && break || sleep 2
+            if curl -sf http://localhost:4444/status >/dev/null; then
+              echo "Selenium Grid is up"
+              break
+            fi
+            sleep 2
           done
+
+          # покажем статус в логе (но не падаем, если вдруг 200 не пришёл — решит следующий stage по таймауту)
           curl -s http://localhost:4444/status || true
         '''
       }
     }
 
     stage('Run Smoke Tests') {
+      options { timeout(time: 20, unit: 'MINUTES') }
       steps {
         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
           sh '''
+            set -euo pipefail
             ./gradlew clean smokeTest --continue \
               -Dheadless.mode=${HEADLESS_MODE} \
               -Ddocker.remote=${DOCKER_REMOTE} \
@@ -51,17 +73,23 @@ pipeline {
     }
 
     stage('Generate Allure Report') {
+      options { timeout(time: 5, unit: 'MINUTES') }
       steps {
         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-          sh './gradlew allureReport'
+          sh '''
+            set -euo pipefail
+            ./gradlew allureReport
+          '''
         }
       }
     }
 
     stage('Download Allure Notifications Jar') {
+      options { timeout(time: 3, unit: 'MINUTES') }
       steps {
         dir('..') {
           sh '''
+            set -euo pipefail
             FILE=allure-notifications-4.8.0.jar
             if [ ! -f "$FILE" ]; then
               wget -q https://github.com/qa-guru/allure-notifications/releases/download/4.8.0/allure-notifications-4.8.0.jar
@@ -72,6 +100,7 @@ pipeline {
     }
 
     stage('Send Telegram Notification') {
+      options { timeout(time: 2, unit: 'MINUTES') }
       steps {
         sh '''#!/usr/bin/env bash
           set -euo pipefail
@@ -126,6 +155,13 @@ pipeline {
       }
 
       sh 'docker compose down -v || true'
+      cleanWs() // очистка воркспейса после архивации и остановки гридa
+    }
+    aborted {
+      echo 'Build aborted by timeout or manual stop.'
+    }
+    failure {
+      echo 'Build failed.'
     }
   }
 }
