@@ -1,4 +1,3 @@
-
 group = "com.gucci"
 version = "1.0-SNAPSHOT"
 
@@ -10,6 +9,7 @@ plugins {
     id("io.freefair.lombok") version "8.4"
     id("io.qameta.allure") version "2.12.0"
     id("org.gradle.test-retry") version "1.6.2"
+    id("org.sonarqube") version "4.3.0.3225"
 }
 java {
     toolchain {
@@ -28,6 +28,13 @@ allure {
                 adapterVersion.set("2.29.0")
             }
         }
+    }
+}
+sonarqube {
+    properties {
+        property("sonar.projectKey", "test")
+        property("sonar.host.url", "http://178.128.182.130:9000")
+        property("sonar.login", "sqp_9fc292977fb6e23874786f24ed4744123dd1149a")
     }
 }
 repositories {
