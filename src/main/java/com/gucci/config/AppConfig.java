@@ -16,4 +16,16 @@ public interface AppConfig extends Config {
 
     @Key("remote.url.docker")
     String dockerUrl();
+
+    @Key("server")
+    String server();
+
+    @Key("port")
+    int port();
+
+    @Key("user")
+    String user();
+
+    @Key("sqlpassword")
+    String sqlpassword();
 }

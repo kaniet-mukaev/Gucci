@@ -56,6 +56,8 @@ dependencies {
     implementation("org.aeonbits.owner:owner:$ownerVersion")
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    implementation("org.postgresql:postgresql:42.7.8")
+    implementation("commons-dbutils:commons-dbutils:1.8.1")
 }
 tasks.test {
     useJUnitPlatform()
